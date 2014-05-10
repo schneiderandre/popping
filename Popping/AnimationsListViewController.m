@@ -7,6 +7,7 @@
 //
 
 #import "AnimationsListViewController.h"
+#import "ButtonViewController.h"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -20,9 +21,17 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 {
     [super viewDidLoad];
     self.title = @"Popping";
-    self.items = @[@"Button"];
+    self.items = @[@"Button Animation"];
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:kCellIdentifier];
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.navigationController pushViewController:[ButtonViewController new]
+                                         animated:YES];
 }
 
 #pragma mark - Table view data source
