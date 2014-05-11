@@ -8,6 +8,7 @@
 
 #import "AnimationsListViewController.h"
 #import "ButtonViewController.h"
+#import "PanViewController.h"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -21,7 +22,9 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 {
     [super viewDidLoad];
     self.title = @"Popping";
-    self.items = @[@"Button Animation"];
+    self.items = @[@[@"Button Animation", [ButtonViewController class]],
+                   @[@"Pan Animation", [PanViewController class]]
+                   ];
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:kCellIdentifier];
 }
@@ -30,7 +33,7 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.navigationController pushViewController:[ButtonViewController new]
+    [self.navigationController pushViewController:[[self.items[indexPath.row] lastObject] new]
                                          animated:YES];
 }
 
@@ -45,7 +48,7 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier
                                                             forIndexPath:indexPath];
-    cell.textLabel.text = self.items[indexPath.row];
+    cell.textLabel.text = [self.items[indexPath.row] firstObject];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }

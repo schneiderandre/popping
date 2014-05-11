@@ -22,6 +22,7 @@
 		B785AD3A19196A2D00621820 /* PoppingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B785AD3919196A2D00621820 /* PoppingTests.m */; };
 		B7FF9668191EBADD00087016 /* AnimationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FF9667191EBADD00087016 /* AnimationsListViewController.m */; };
 		B7FF966C191EBF6900087016 /* ButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FF966B191EBF6900087016 /* ButtonViewController.m */; };
+		B7FF9674191FAF1900087016 /* PanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FF9673191FAF1900087016 /* PanViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		B7FF9667191EBADD00087016 /* AnimationsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationsListViewController.m; sourceTree = "<group>"; };
 		B7FF966A191EBF6900087016 /* ButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonViewController.h; sourceTree = "<group>"; };
 		B7FF966B191EBF6900087016 /* ButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonViewController.m; sourceTree = "<group>"; };
+		B7FF9672191FAF1900087016 /* PanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanViewController.h; sourceTree = "<group>"; };
+		B7FF9673191FAF1900087016 /* PanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanViewController.m; sourceTree = "<group>"; };
 		D41116F6FC8F4542BD5F61B1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E41068F631EC4B51B2458F85 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +161,7 @@
 		B7FF965B191EB5D900087016 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B7FF9671191FAF0900087016 /* PanViewController */,
 				B7FF9669191EBF3F00087016 /* ButtonViewController */,
 				B7FF965E191EB63700087016 /* AnimationListViewController */,
 				B7FF965C191EB5E300087016 /* AppDelegate */,
@@ -190,6 +194,15 @@
 				B7FF966B191EBF6900087016 /* ButtonViewController.m */,
 			);
 			name = ButtonViewController;
+			sourceTree = "<group>";
+		};
+		B7FF9671191FAF0900087016 /* PanViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7FF9672191FAF1900087016 /* PanViewController.h */,
+				B7FF9673191FAF1900087016 /* PanViewController.m */,
+			);
+			name = PanViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +339,7 @@
 				B785AD2519196A2D00621820 /* AppDelegate.m in Sources */,
 				B785AD2119196A2D00621820 /* main.m in Sources */,
 				B7FF9668191EBADD00087016 /* AnimationsListViewController.m in Sources */,
+				B7FF9674191FAF1900087016 /* PanViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
