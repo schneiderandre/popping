@@ -26,6 +26,11 @@
 
 @implementation PaperButton
 
++ (instancetype)button
+{
+    return [self buttonWithOrigin:CGPointZero];
+}
+
 + (instancetype)buttonWithOrigin:(CGPoint)origin
 {
     return [[self alloc] initWithFrame:CGRectMake(origin.x,

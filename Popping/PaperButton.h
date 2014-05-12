@@ -10,6 +10,7 @@
 
 @interface PaperButton : UIControl
 
++ (instancetype)button;
 + (instancetype)buttonWithOrigin:(CGPoint)origin;
 
 @end
