@@ -7,6 +7,7 @@
 //
 
 #import "PaperButtonViewController.h"
+#import "PaperButton.h"
 
 @interface PaperButtonViewController ()
 
@@ -19,6 +20,11 @@
     [super viewDidLoad];
     self.title = @"Paper Button Animation";
     self.view.backgroundColor = [UIColor whiteColor];
+
+    CGPoint origin = CGPointMake(CGRectGetWidth(self.view.frame) - 40.f, 80.f);
+
+    PaperButton *button = [PaperButton buttonWithOrigin:origin];
+    [self.view addSubview:button];
 }
 
 @end
