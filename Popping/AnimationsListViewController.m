@@ -9,6 +9,7 @@
 #import "AnimationsListViewController.h"
 #import "ButtonViewController.h"
 #import "PanViewController.h"
+#import "PaperButtonViewController.h"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -23,7 +24,8 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
     [super viewDidLoad];
     self.title = @"Popping";
     self.items = @[@[@"Button Animation", [ButtonViewController class]],
-                   @[@"Pan Animation", [PanViewController class]]
+                   @[@"Pan Animation", [PanViewController class]],
+                   @[@"Paper Button Animation", [PaperButtonViewController class]]
                    ];
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:kCellIdentifier];
