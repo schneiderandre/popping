@@ -14,6 +14,7 @@
 @property(nonatomic) CALayer *topLayer;
 @property(nonatomic) CALayer *middleLayer;
 @property(nonatomic) CALayer *bottomLayer;
+@property(nonatomic) CALayer *contentLayer;
 @property(nonatomic) BOOL showMenu;
 
 - (void)touchUpInsideHandler:(PaperButton *)sender;
@@ -29,8 +30,8 @@
 {
     return [[self alloc] initWithFrame:CGRectMake(origin.x,
                                                   origin.y,
-                                                  24.f,
-                                                  17.f)];
+                                                  48.f,
+                                                  34.f)];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -56,13 +57,13 @@
 
     POPBasicAnimation *positionTopAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
     positionTopAnimation.duration = 0.3;
-    positionTopAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMidX(self.bounds),
-                                                                         roundf(CGRectGetMinY(self.bounds)+(height/2)))];
+    positionTopAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMidX(self.contentLayer.bounds),
+                                                                         roundf(CGRectGetMinY(self.contentLayer.bounds)+(height/2)))];
 
     POPBasicAnimation *positionBottomAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
     positionTopAnimation.duration = 0.3;
-    positionBottomAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMidX(self.bounds),
-                                                                            roundf(CGRectGetMaxY(self.bounds)-(height/2)))];
+    positionBottomAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMidX(self.contentLayer.bounds),
+                                                                            roundf(CGRectGetMaxY(self.contentLayer.bounds)-(height/2)))];
 
     POPSpringAnimation *transformTopAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
     transformTopAnimation.toValue = @(0);
@@ -86,7 +87,7 @@
 - (void)animateToClose
 {
     [self removeAllAnimations];
-    CGPoint center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    CGPoint center = CGPointMake(CGRectGetMidX(self.contentLayer.bounds), CGRectGetMidY(self.contentLayer.bounds));
 
     POPBasicAnimation *fadeAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
     fadeAnimation.toValue = @0;
@@ -131,29 +132,33 @@
 
 - (void)setup
 {
+    self.contentLayer = [CALayer layer];
+    self.contentLayer.frame = CGRectMake(0.f, 0.f, 24.f, 17.f);
+    self.contentLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     CGFloat height = 2.f;
-    CGFloat width = CGRectGetWidth(self.bounds);
+    CGFloat width = CGRectGetWidth(self.contentLayer.bounds);
     CGFloat cornerRadius =  2.f;
     CGColorRef color = [[UIColor blackColor] CGColor];
 
     self.topLayer = [CALayer layer];
-    self.topLayer.frame = CGRectMake(0, CGRectGetMinY(self.bounds), width, height);
+    self.topLayer.frame = CGRectMake(0, CGRectGetMinY(self.contentLayer.bounds), width, height);
     self.topLayer.cornerRadius = cornerRadius;
     self.topLayer.backgroundColor = color;
 
     self.middleLayer = [CALayer layer];
-    self.middleLayer.frame = CGRectMake(0, CGRectGetMidY(self.bounds)-(height/2), width, height);
+    self.middleLayer.frame = CGRectMake(0, CGRectGetMidY(self.contentLayer.bounds)-(height/2), width, height);
     self.middleLayer.cornerRadius = cornerRadius;
     self.middleLayer.backgroundColor = color;
 
     self.bottomLayer = [CALayer layer];
-    self.bottomLayer.frame = CGRectMake(0, CGRectGetMaxY(self.bounds)-height, width, height);
+    self.bottomLayer.frame = CGRectMake(0, CGRectGetMaxY(self.contentLayer.bounds)-height, width, height);
     self.bottomLayer.cornerRadius = cornerRadius;
     self.bottomLayer.backgroundColor = color;
 
-    [self.layer addSublayer:self.topLayer];
-    [self.layer addSublayer:self.middleLayer];
-    [self.layer addSublayer:self.bottomLayer];
+    [self.layer addSublayer:self.contentLayer];
+    [self.contentLayer addSublayer:self.topLayer];
+    [self.contentLayer addSublayer:self.middleLayer];
+    [self.contentLayer addSublayer:self.bottomLayer];
 
     [self addTarget:self
              action:@selector(touchUpInsideHandler:)

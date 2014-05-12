@@ -21,7 +21,7 @@
     self.title = @"Paper Button Animation";
     self.view.backgroundColor = [UIColor whiteColor];
 
-    CGPoint origin = CGPointMake(CGRectGetWidth(self.view.frame) - 40.f, 80.f);
+    CGPoint origin = CGPointMake(CGRectGetWidth(self.view.frame) - 56.f, 72.f);
 
     PaperButton *button = [PaperButton buttonWithOrigin:origin];
     [self.view addSubview:button];
