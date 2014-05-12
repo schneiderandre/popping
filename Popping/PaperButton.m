@@ -7,7 +7,6 @@
 //
 
 #import "PaperButton.h"
-
 #import <POP/POP.h>
 
 @interface PaperButton()
