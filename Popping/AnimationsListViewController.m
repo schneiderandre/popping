@@ -10,6 +10,7 @@
 #import "ButtonViewController.h"
 #import "PanViewController.h"
 #import "PaperButtonViewController.h"
+#import "CustomTransitionViewController.h"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -25,7 +26,8 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
     self.title = @"Popping";
     self.items = @[@[@"Button Animation", [ButtonViewController class]],
                    @[@"Pan Animation", [PanViewController class]],
-                   @[@"Paper Button Animation", [PaperButtonViewController class]]
+                   @[@"Paper Button Animation", [PaperButtonViewController class]],
+                   @[@"Custom Transition", [CustomTransitionViewController class]]
                    ];
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:kCellIdentifier];

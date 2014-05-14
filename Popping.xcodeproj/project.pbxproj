@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		74CC34E42E0A4A91BF6C604C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D41116F6FC8F4542BD5F61B1 /* libPods.a */; };
+		B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458331923DB2100CF6961 /* CustomTransitionViewController.m */; };
 		B785AD1519196A2D00621820 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1419196A2D00621820 /* Foundation.framework */; };
 		B785AD1719196A2D00621820 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1619196A2D00621820 /* CoreGraphics.framework */; };
 		B785AD1919196A2D00621820 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1819196A2D00621820 /* UIKit.framework */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B70458321923DB2100CF6961 /* CustomTransitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTransitionViewController.h; sourceTree = "<group>"; };
+		B70458331923DB2100CF6961 /* CustomTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTransitionViewController.m; sourceTree = "<group>"; };
 		B785AD1119196A2D00621820 /* Popping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B785AD1419196A2D00621820 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B785AD1619196A2D00621820 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -96,6 +99,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B70458311923DB0000CF6961 /* CustomTransitionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B70458321923DB2100CF6961 /* CustomTransitionViewController.h */,
+				B70458331923DB2100CF6961 /* CustomTransitionViewController.m */,
+			);
+			name = CustomTransitionViewController;
+			sourceTree = "<group>";
+		};
 		B785AD0819196A2D00621820 = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +219,7 @@
 		B7FF965B191EB5D900087016 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B70458311923DB0000CF6961 /* CustomTransitionViewController */,
 				B7ECD7471921146A007F9116 /* PaperButtonViewController */,
 				B7FF9671191FAF0900087016 /* PanViewController */,
 				B7FF9669191EBF3F00087016 /* ButtonViewController */,
@@ -385,6 +398,7 @@
 				B7ECD74F192115EF007F9116 /* PaperButton.m in Sources */,
 				B7FF966C191EBF6900087016 /* ButtonViewController.m in Sources */,
 				B7ECD754192120D4007F9116 /* FlatButton.m in Sources */,
+				B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */,
 				B785AD2519196A2D00621820 /* AppDelegate.m in Sources */,
 				B785AD2119196A2D00621820 /* main.m in Sources */,
 				B7ECD74A19211489007F9116 /* PaperButtonViewController.m in Sources */,
