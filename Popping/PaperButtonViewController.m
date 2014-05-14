@@ -9,10 +9,6 @@
 #import "PaperButtonViewController.h"
 #import "PaperButton.h"
 
-@interface PaperButtonViewController ()
-
-@end
-
 @implementation PaperButtonViewController
 
 - (void)viewDidLoad
