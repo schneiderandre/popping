@@ -38,10 +38,8 @@
                                                      metrics:nil
                                                      views:view]];
 
-    POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    CGPoint fromPosition = CGPointMake(toVC.view.layer.position.x,
-                                       -CGRectGetHeight(toVC.view.bounds)/2);
-    positionAnimation.fromValue = [NSValue valueWithCGPoint:fromPosition];
+    POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionY];
+    positionAnimation.fromValue = @(-toVC.view.layer.position.y);
     positionAnimation.springBounciness = 10;
     [positionAnimation setCompletionBlock:^(POPAnimation *anim, BOOL finished) {
         [transitionContext completeTransition:YES];
