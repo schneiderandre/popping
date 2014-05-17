@@ -22,19 +22,8 @@
     [super viewDidLoad];
     self.title = @"Custom Transition";
     self.view.backgroundColor = [UIColor whiteColor];
-}
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
-    ModalViewController *modalViewController = [ModalViewController new];
-    modalViewController.transitioningDelegate = self;
-    modalViewController.modalPresentationStyle = UIModalPresentationCustom;
-
-    [self.navigationController presentViewController:modalViewController
-                                            animated:YES
-                                          completion:NULL];
+    [self addPresentButton];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
@@ -49,6 +38,44 @@
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
     return [DismissingAnimator new];
+}
+
+#pragma mark - Private Instance methods
+
+- (void)addPresentButton
+{
+    UIButton *presentButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    presentButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [presentButton setTitle:@"Present Modal View Controller" forState:UIControlStateNormal];
+    [presentButton addTarget:self action:@selector(present:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:presentButton];
+
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:presentButton
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1.f
+                                                           constant:0.f]];
+
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:presentButton
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1.f
+                                                           constant:0.f]];
+}
+
+- (void)present:(id)sender
+{
+    ModalViewController *modalViewController = [ModalViewController new];
+    modalViewController.transitioningDelegate = self;
+    modalViewController.modalPresentationStyle = UIModalPresentationCustom;
+
+    [self.navigationController presentViewController:modalViewController
+                                            animated:YES
+                                          completion:NULL];
 }
 
 @end

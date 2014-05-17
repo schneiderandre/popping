@@ -42,8 +42,8 @@
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1
-                                                           constant:0]];
+                                                         multiplier:1.f
+                                                           constant:0.f]];
 
     [self.view addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:@"V:[dismissButton]-|"
