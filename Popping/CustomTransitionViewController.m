@@ -7,7 +7,9 @@
 //
 
 #import "CustomTransitionViewController.h"
-#import "PopAnimator.h"
+#import "PresentingAnimator.h"
+#import "DismissingAnimator.h"
+#import "ModalViewController.h"
 
 @interface CustomTransitionViewController() <UIViewControllerTransitioningDelegate>
 
@@ -26,14 +28,9 @@
 {
     [super viewDidAppear:animated];
 
-    UIViewController *modalViewController = [UIViewController new];
+    ModalViewController *modalViewController = [ModalViewController new];
     modalViewController.transitioningDelegate = self;
     modalViewController.modalPresentationStyle = UIModalPresentationCustom;
-    modalViewController.view.layer.cornerRadius = 8.f;
-    modalViewController.view.backgroundColor = [UIColor colorWithRed:46/255.f
-                                                               green:204/255.f
-                                                                blue:113/255.f
-                                                               alpha:1.000];
 
     [self.navigationController presentViewController:modalViewController
                                             animated:YES
@@ -46,12 +43,12 @@
                                                                   presentingController:(UIViewController *)presenting
                                                                       sourceController:(UIViewController *)source
 {
-    return [PopAnimator new];
+    return [PresentingAnimator new];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
-    return [PopAnimator new];
+    return [DismissingAnimator new];
 }
 
 @end

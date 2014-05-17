@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 André Schneider. All rights reserved.
 //
 
-#import "PopAnimator.h"
+#import "PresentingAnimator.h"
 #import <POP/POP.h>
 
-@implementation PopAnimator
+@implementation PresentingAnimator
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
@@ -18,6 +18,9 @@
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
 {
+    UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    fromVC.view.userInteractionEnabled = NO;
+
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     toVC.view.translatesAutoresizingMaskIntoConstraints = NO;
     [transitionContext.containerView addSubview:toVC.view];
@@ -30,7 +33,7 @@
                                                      views:view]];
 
     [transitionContext.containerView addConstraints:[NSLayoutConstraint
-                                                     constraintsWithVisualFormat:@"V:|-72-[toView]-72-|"
+                                                     constraintsWithVisualFormat:@"V:|-104-[toView]-104-|"
                                                      options:0
                                                      metrics:nil
                                                      views:view]];

@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PopAnimator : NSObject <UIViewControllerAnimatedTransitioning>
+@interface PresentingAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
 @end
