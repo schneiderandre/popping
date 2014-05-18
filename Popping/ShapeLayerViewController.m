@@ -14,6 +14,7 @@
 @property(nonatomic) PasswordStrengthIndicatorView *passwordStrengthIndicatorView;
 - (void)addPasswordTextField;
 - (void)addPasswordStrengthView;
+- (void)textFieldDidChange:(UITextField *)sender;
 @end
 
 @implementation ShapeLayerViewController
@@ -41,6 +42,9 @@
     self.passwordTextField.layer.cornerRadius = 2.f;
     self.passwordTextField.placeholder = @"Enter a Password";
     [self.passwordTextField becomeFirstResponder];
+    [self.passwordTextField addTarget:self
+                               action:@selector(textFieldDidChange:)
+                     forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.passwordTextField];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_passwordTextField);
@@ -76,6 +80,26 @@
                                options:0
                                metrics:nil
                                views:views]];
+}
+
+- (void)textFieldDidChange:(UITextField *)sender
+{
+    if (sender.text.length < 1) {
+        self.passwordStrengthIndicatorView.status = PasswordStrengthIndicatorViewStatusNone;
+        return;
+    }
+
+    if (sender.text.length < 4) {
+        self.passwordStrengthIndicatorView.status = PasswordStrengthIndicatorViewStatusWeak;
+        return;
+    }
+
+    if (sender.text.length < 8) {
+        self.passwordStrengthIndicatorView.status = PasswordStrengthIndicatorViewStatusFair;
+        return;
+    }
+
+    self.passwordStrengthIndicatorView.status = PasswordStrengthIndicatorViewStatusStrong;
 }
 
 @end
