@@ -18,34 +18,25 @@
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    fromVC.view.userInteractionEnabled = NO;
+    UIView *fromView = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view;
+    fromView.userInteractionEnabled = NO;
 
-    UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    toVC.view.translatesAutoresizingMaskIntoConstraints = NO;
-    [transitionContext.containerView addSubview:toVC.view];
-    NSDictionary *view = @{@"toView" : toVC.view};
-
-    [transitionContext.containerView addConstraints:[NSLayoutConstraint
-                                                     constraintsWithVisualFormat:@"H:|-24-[toView]-24-|"
-                                                     options:0
-                                                     metrics:nil
-                                                     views:view]];
-
-    [transitionContext.containerView addConstraints:[NSLayoutConstraint
-                                                     constraintsWithVisualFormat:@"V:|-104-[toView]-104-|"
-                                                     options:0
-                                                     metrics:nil
-                                                     views:view]];
+    UIView *toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
+    toView.frame = CGRectMake(0,
+                              0,
+                              CGRectGetWidth(transitionContext.containerView.bounds) - 104.f,
+                              CGRectGetHeight(transitionContext.containerView.bounds) - 288.f);
+    toView.center = CGPointMake(transitionContext.containerView.center.x, -transitionContext.containerView.center.y);
+    [transitionContext.containerView addSubview:toView];
 
     POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionY];
-    positionAnimation.fromValue = @(-toVC.view.layer.position.y);
+    positionAnimation.toValue = @(transitionContext.containerView.center.y);
     positionAnimation.springBounciness = 10;
     [positionAnimation setCompletionBlock:^(POPAnimation *anim, BOOL finished) {
         [transitionContext completeTransition:YES];
     }];
 
-    [toVC.view.layer pop_addAnimation:positionAnimation forKey:@"positionAnimation"];
+    [toView.layer pop_addAnimation:positionAnimation forKey:@"positionAnimation"];
 }
 
 @end
