@@ -11,6 +11,7 @@
 		B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458331923DB2100CF6961 /* CustomTransitionViewController.m */; };
 		B70458381923DE2500CF6961 /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458371923DE2500CF6961 /* PresentingAnimator.m */; };
 		B7805EE1192902A900CF997E /* ShapeLayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7805EE0192902A900CF997E /* ShapeLayerViewController.m */; };
+		B7805EE51929141100CF997E /* PasswordStrengthIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7805EE41929141100CF997E /* PasswordStrengthIndicatorView.m */; };
 		B785AD1519196A2D00621820 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1419196A2D00621820 /* Foundation.framework */; };
 		B785AD1719196A2D00621820 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1619196A2D00621820 /* CoreGraphics.framework */; };
 		B785AD1919196A2D00621820 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1819196A2D00621820 /* UIKit.framework */; };
@@ -50,6 +51,8 @@
 		B70458371923DE2500CF6961 /* PresentingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentingAnimator.m; sourceTree = "<group>"; };
 		B7805EDF192902A900CF997E /* ShapeLayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeLayerViewController.h; sourceTree = "<group>"; };
 		B7805EE0192902A900CF997E /* ShapeLayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShapeLayerViewController.m; sourceTree = "<group>"; };
+		B7805EE31929141100CF997E /* PasswordStrengthIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordStrengthIndicatorView.h; sourceTree = "<group>"; };
+		B7805EE41929141100CF997E /* PasswordStrengthIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordStrengthIndicatorView.m; sourceTree = "<group>"; };
 		B785AD1119196A2D00621820 /* Popping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B785AD1419196A2D00621820 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B785AD1619196A2D00621820 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -136,6 +139,15 @@
 				B7805EE0192902A900CF997E /* ShapeLayerViewController.m */,
 			);
 			name = ShapeLayerViewController;
+			sourceTree = "<group>";
+		};
+		B7805EE2192913E300CF997E /* PasswordStrengthIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				B7805EE31929141100CF997E /* PasswordStrengthIndicatorView.h */,
+				B7805EE41929141100CF997E /* PasswordStrengthIndicatorView.m */,
+			);
+			name = PasswordStrengthIndicatorView;
 			sourceTree = "<group>";
 		};
 		B785AD0819196A2D00621820 = {
@@ -250,6 +262,7 @@
 		B7ECD74B192115D8007F9116 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				B7805EE2192913E300CF997E /* PasswordStrengthIndicatorView */,
 				B7ECD751192120C6007F9116 /* FlatButton */,
 				B7ECD74C192115DD007F9116 /* PaperButton */,
 			);
@@ -459,6 +472,7 @@
 				B7FF966C191EBF6900087016 /* ButtonViewController.m in Sources */,
 				B7ECD754192120D4007F9116 /* FlatButton.m in Sources */,
 				B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */,
+				B7805EE51929141100CF997E /* PasswordStrengthIndicatorView.m in Sources */,
 				B70458381923DE2500CF6961 /* PresentingAnimator.m in Sources */,
 				B78E3DEB1926A1450020B9D4 /* ModalViewController.m in Sources */,
 				B785AD2519196A2D00621820 /* AppDelegate.m in Sources */,

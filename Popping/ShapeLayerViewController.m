@@ -7,10 +7,11 @@
 //
 
 #import "ShapeLayerViewController.h"
+#import "PasswordStrengthIndicatorView.h"
 
 @interface ShapeLayerViewController()
 @property(nonatomic) UITextField *passwordTextField;
-@property(nonatomic) UIView *passwordStrengthView;
+@property(nonatomic) PasswordStrengthIndicatorView *passwordStrengthIndicatorView;
 - (void)addPasswordTextField;
 - (void)addPasswordStrengthView;
 @end
@@ -59,62 +60,19 @@
 
 - (void)addPasswordStrengthView
 {
-    self.passwordStrengthView = [UIView new];
-    self.passwordStrengthView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.05];
-    self.passwordStrengthView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.passwordStrengthView.layer.cornerRadius = 2.f;
-    [self.view addSubview:self.passwordStrengthView];
+    self.passwordStrengthIndicatorView = [PasswordStrengthIndicatorView new];
+    [self.view addSubview:self.passwordStrengthIndicatorView];
 
-    UIView *indicatorView = [UIView new];
-    indicatorView.translatesAutoresizingMaskIntoConstraints = NO;
-    indicatorView.backgroundColor = [UIColor redColor];
-    indicatorView.layer.cornerRadius = self.passwordStrengthView.layer.cornerRadius;
-    [self.passwordStrengthView addSubview:indicatorView];
-
-
-    [self.passwordStrengthView addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
-                                                                          attribute:NSLayoutAttributeHeight
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:self.passwordStrengthView
-                                                                          attribute:NSLayoutAttributeHeight
-                                                                         multiplier:1.f
-                                                                           constant:0]];
-
-    [self.passwordStrengthView addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
-                                                                          attribute:NSLayoutAttributeWidth
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:self.passwordStrengthView
-                                                                          attribute:NSLayoutAttributeWidth
-                                                                         multiplier:0.0f
-                                                                           constant:0]];
-
-    [self.passwordStrengthView addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
-                                                          attribute:NSLayoutAttributeLeft
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.passwordStrengthView
-                                                          attribute:NSLayoutAttributeLeft
-                                                         multiplier:1.f
-                                                           constant:0.f]];
-
-    [self.passwordStrengthView addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
-                                                          attribute:NSLayoutAttributeTop
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.passwordStrengthView
-                                                          attribute:NSLayoutAttributeTop
-                                                         multiplier:1.f
-                                                           constant:0.f]];
-
-
-    NSDictionary *views = NSDictionaryOfVariableBindings(_passwordTextField, _passwordStrengthView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_passwordTextField, _passwordStrengthIndicatorView);
 
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:|-[_passwordStrengthView]-|"
+                               constraintsWithVisualFormat:@"H:|-[_passwordStrengthIndicatorView]-|"
                                options:0
                                metrics:nil
                                views:views]];
 
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:[_passwordTextField]-[_passwordStrengthView(==10)]"
+                               constraintsWithVisualFormat:@"V:[_passwordTextField]-[_passwordStrengthIndicatorView(==10)]"
                                options:0
                                metrics:nil
                                views:views]];
