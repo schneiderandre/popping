@@ -11,6 +11,7 @@
 #import "PanViewController.h"
 #import "PaperButtonViewController.h"
 #import "CustomTransitionViewController.h"
+#import "ShapeLayerViewController.h"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -29,7 +30,8 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
     self.items = @[@[@"Button Animation", [ButtonViewController class]],
                    @[@"Pan Animation", [PanViewController class]],
                    @[@"Paper Button Animation", [PaperButtonViewController class]],
-                   @[@"Custom Transition", [CustomTransitionViewController class]]
+                   @[@"Custom Transition", [CustomTransitionViewController class]],
+                   @[@"Shape Layer Stroke Animation", [ShapeLayerViewController class]]
                    ];
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:kCellIdentifier];

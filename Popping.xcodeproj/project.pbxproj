@@ -10,6 +10,7 @@
 		74CC34E42E0A4A91BF6C604C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D41116F6FC8F4542BD5F61B1 /* libPods.a */; };
 		B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458331923DB2100CF6961 /* CustomTransitionViewController.m */; };
 		B70458381923DE2500CF6961 /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458371923DE2500CF6961 /* PresentingAnimator.m */; };
+		B7805EE1192902A900CF997E /* ShapeLayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7805EE0192902A900CF997E /* ShapeLayerViewController.m */; };
 		B785AD1519196A2D00621820 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1419196A2D00621820 /* Foundation.framework */; };
 		B785AD1719196A2D00621820 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1619196A2D00621820 /* CoreGraphics.framework */; };
 		B785AD1919196A2D00621820 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1819196A2D00621820 /* UIKit.framework */; };
@@ -47,6 +48,8 @@
 		B70458331923DB2100CF6961 /* CustomTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTransitionViewController.m; sourceTree = "<group>"; };
 		B70458361923DE2500CF6961 /* PresentingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentingAnimator.h; sourceTree = "<group>"; };
 		B70458371923DE2500CF6961 /* PresentingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentingAnimator.m; sourceTree = "<group>"; };
+		B7805EDF192902A900CF997E /* ShapeLayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeLayerViewController.h; sourceTree = "<group>"; };
+		B7805EE0192902A900CF997E /* ShapeLayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShapeLayerViewController.m; sourceTree = "<group>"; };
 		B785AD1119196A2D00621820 /* Popping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B785AD1419196A2D00621820 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B785AD1619196A2D00621820 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -124,6 +127,15 @@
 				B78E3DEC1926A5120020B9D4 /* PresentingAnimator */,
 			);
 			name = Animator;
+			sourceTree = "<group>";
+		};
+		B7805EDE1929028500CF997E /* ShapeLayerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7805EDF192902A900CF997E /* ShapeLayerViewController.h */,
+				B7805EE0192902A900CF997E /* ShapeLayerViewController.m */,
+			);
+			name = ShapeLayerViewController;
 			sourceTree = "<group>";
 		};
 		B785AD0819196A2D00621820 = {
@@ -265,6 +277,7 @@
 		B7FF965B191EB5D900087016 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B7805EDE1929028500CF997E /* ShapeLayerViewController */,
 				B78E3DE81926A1300020B9D4 /* ModalViewController */,
 				B70458311923DB0000CF6961 /* CustomTransitionViewController */,
 				B7ECD7471921146A007F9116 /* PaperButtonViewController */,
@@ -450,6 +463,7 @@
 				B78E3DEB1926A1450020B9D4 /* ModalViewController.m in Sources */,
 				B785AD2519196A2D00621820 /* AppDelegate.m in Sources */,
 				B785AD2119196A2D00621820 /* main.m in Sources */,
+				B7805EE1192902A900CF997E /* ShapeLayerViewController.m in Sources */,
 				B78E3DF01926A57D0020B9D4 /* DismissingAnimator.m in Sources */,
 				B7ECD74A19211489007F9116 /* PaperButtonViewController.m in Sources */,
 				B7FF9668191EBADD00087016 /* AnimationsListViewController.m in Sources */,
