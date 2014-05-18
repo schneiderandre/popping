@@ -13,7 +13,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Layout Constraints";
     self.view.backgroundColor = [UIColor whiteColor];
 }
 

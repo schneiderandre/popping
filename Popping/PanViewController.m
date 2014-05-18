@@ -14,7 +14,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Pan Animation";
     self.view.backgroundColor = [UIColor whiteColor];
 
     UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self

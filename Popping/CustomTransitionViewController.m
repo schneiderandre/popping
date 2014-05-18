@@ -20,7 +20,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Custom Transition";
     self.view.backgroundColor = [UIColor whiteColor];
 
     [self addPresentButton];

@@ -23,7 +23,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Paper Button Animation";
     self.view.backgroundColor = [UIColor whiteColor];
 
     [self addControls];

@@ -39,7 +39,9 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.navigationController pushViewController:[[self.items[indexPath.row] lastObject] new]
+    UIViewController *viewController = [[self.items[indexPath.row] lastObject] new];
+    viewController.title = [self.items[indexPath.row] firstObject];
+    [self.navigationController pushViewController:viewController
                                          animated:YES];
 }
 

@@ -14,7 +14,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Button Animation";
     self.view.backgroundColor = [UIColor whiteColor];
 
     FlatButton *flatButton = [FlatButton button];
