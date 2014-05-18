@@ -17,6 +17,8 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 
 @interface AnimationsListViewController()
 @property(nonatomic) NSArray *items;
+- (NSString *)titleForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UIViewController *)viewControllerForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @implementation AnimationsListViewController
@@ -39,8 +41,8 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController *viewController = [[self.items[indexPath.row] lastObject] new];
-    viewController.title = [self.items[indexPath.row] firstObject];
+    UIViewController *viewController = [self viewControllerForRowAtIndexPath:indexPath];
+    viewController.title = [self titleForRowAtIndexPath:indexPath];
     [self.navigationController pushViewController:viewController
                                          animated:YES];
 }
@@ -59,6 +61,17 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
     cell.textLabel.text = [self.items[indexPath.row] firstObject];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
+}
+
+#pragma mark - Private Instance methods
+
+- (NSString *)titleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self.items[indexPath.row] firstObject];
+}
+
+- (UIViewController *)viewControllerForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [[self.items[indexPath.row] lastObject] new];
 }
 
 @end
