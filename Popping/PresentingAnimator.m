@@ -36,7 +36,12 @@
         [transitionContext completeTransition:YES];
     }];
 
+    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    scaleAnimation.springBounciness = 20;
+    scaleAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(1.2, 1.4)];
+
     [toView.layer pop_addAnimation:positionAnimation forKey:@"positionAnimation"];
+    [toView.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
 }
 
 @end
