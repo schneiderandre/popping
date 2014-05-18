@@ -9,7 +9,10 @@
 #import "PasswordStrengthIndicatorView.h"
 
 @interface PasswordStrengthIndicatorView()
+@property(nonatomic) UIView *indicatorView;
 - (void)addIndicatorView;
+- (void)animateIndicatorViewToStatus:(PasswordStrengthIndicatorViewStatus)status;
+- (CGFloat)multiplierForStatus:(PasswordStrengthIndicatorViewStatus)status;
 @end
 
 @implementation PasswordStrengthIndicatorView
@@ -26,17 +29,79 @@
     return self;
 }
 
+#pragma mark - Setter
+
+- (void)setStatus:(PasswordStrengthIndicatorViewStatus)status
+{
+    if (status == _status) {
+        return;
+    }
+    _status = status;
+    [self animateIndicatorViewToStatus:status];
+}
+
 #pragma mark - Private Instance methods
+
+- (void)animateIndicatorViewToStatus:(PasswordStrengthIndicatorViewStatus)status
+{
+    [self.constraints enumerateObjectsUsingBlock:^(NSLayoutConstraint *constraint, NSUInteger idx, BOOL *stop) {
+        if (constraint.firstAttribute == NSLayoutAttributeWidth) {
+            *stop = YES;
+            [self removeConstraint:constraint];
+        }
+    }];
+
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.indicatorView
+                                                     attribute:NSLayoutAttributeWidth
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeWidth
+                                                    multiplier:[self multiplierForStatus:status]
+                                                      constant:0]];
+
+    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0.7 options:0 animations:^{
+        [self layoutIfNeeded];
+        self.indicatorView.backgroundColor = [self colorForStatus:status];
+    } completion:NULL];
+}
+
+- (CGFloat)multiplierForStatus:(PasswordStrengthIndicatorViewStatus)status
+{
+    switch (status) {
+        case PasswordStrengthIndicatorViewStatusWeak:
+            return 0.33f;
+        case PasswordStrengthIndicatorViewStatusFair:
+            return 0.66f;
+        case PasswordStrengthIndicatorViewStatusStrong:
+            return 1.f;
+        default:
+            return 0.f;
+    }
+}
+
+- (UIColor *)colorForStatus:(PasswordStrengthIndicatorViewStatus)status
+{
+    switch (status) {
+        case PasswordStrengthIndicatorViewStatusWeak:
+            return [UIColor redColor];
+        case PasswordStrengthIndicatorViewStatusFair:
+            return [UIColor orangeColor];
+        case PasswordStrengthIndicatorViewStatusStrong:
+            return [UIColor greenColor];
+        default:
+            return [UIColor whiteColor];
+    }
+}
 
 - (void)addIndicatorView
 {
-    UIView *indicatorView = [UIView new];
-    indicatorView.translatesAutoresizingMaskIntoConstraints = NO;
-    indicatorView.backgroundColor = [UIColor redColor];
-    indicatorView.layer.cornerRadius = self.layer.cornerRadius;
-    [self addSubview:indicatorView];
+    self.indicatorView = [UIView new];
+    self.indicatorView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.indicatorView.backgroundColor = [UIColor redColor];
+    self.indicatorView.layer.cornerRadius = self.layer.cornerRadius;
+    [self addSubview:self.indicatorView];
 
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.indicatorView
                                                      attribute:NSLayoutAttributeHeight
                                                      relatedBy:NSLayoutRelationEqual
                                                         toItem:self
@@ -44,15 +109,15 @@
                                                     multiplier:1.f
                                                       constant:0]];
 
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.indicatorView
                                                      attribute:NSLayoutAttributeWidth
                                                      relatedBy:NSLayoutRelationEqual
                                                         toItem:self
                                                      attribute:NSLayoutAttributeWidth
-                                                    multiplier:0.0f
+                                                    multiplier:[self multiplierForStatus:self.status]
                                                       constant:0]];
 
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.indicatorView
                                                      attribute:NSLayoutAttributeLeft
                                                      relatedBy:NSLayoutRelationEqual
                                                         toItem:self
@@ -60,7 +125,7 @@
                                                     multiplier:1.f
                                                       constant:0.f]];
 
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.indicatorView
                                                      attribute:NSLayoutAttributeTop
                                                      relatedBy:NSLayoutRelationEqual
                                                         toItem:self

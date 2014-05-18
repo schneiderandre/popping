@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, PasswordStrengthIndicatorViewStatus) {
+    PasswordStrengthIndicatorViewStatusNone,
+    PasswordStrengthIndicatorViewStatusWeak,
+    PasswordStrengthIndicatorViewStatusFair,
+    PasswordStrengthIndicatorViewStatusStrong
+};
+
 @interface PasswordStrengthIndicatorView : UIView
+
+@property(nonatomic) PasswordStrengthIndicatorViewStatus status;
 
 @end
