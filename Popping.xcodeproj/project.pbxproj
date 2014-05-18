@@ -10,6 +10,7 @@
 		74CC34E42E0A4A91BF6C604C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D41116F6FC8F4542BD5F61B1 /* libPods.a */; };
 		B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458331923DB2100CF6961 /* CustomTransitionViewController.m */; };
 		B70458381923DE2500CF6961 /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458371923DE2500CF6961 /* PresentingAnimator.m */; };
+		B7805EDD1928A42600CF997E /* ConstraintsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7805EDC1928A42600CF997E /* ConstraintsViewController.m */; };
 		B785AD1519196A2D00621820 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1419196A2D00621820 /* Foundation.framework */; };
 		B785AD1719196A2D00621820 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1619196A2D00621820 /* CoreGraphics.framework */; };
 		B785AD1919196A2D00621820 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785AD1819196A2D00621820 /* UIKit.framework */; };
@@ -47,6 +48,8 @@
 		B70458331923DB2100CF6961 /* CustomTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTransitionViewController.m; sourceTree = "<group>"; };
 		B70458361923DE2500CF6961 /* PresentingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentingAnimator.h; sourceTree = "<group>"; };
 		B70458371923DE2500CF6961 /* PresentingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentingAnimator.m; sourceTree = "<group>"; };
+		B7805EDB1928A42600CF997E /* ConstraintsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintsViewController.h; sourceTree = "<group>"; };
+		B7805EDC1928A42600CF997E /* ConstraintsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintsViewController.m; sourceTree = "<group>"; };
 		B785AD1119196A2D00621820 /* Popping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B785AD1419196A2D00621820 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B785AD1619196A2D00621820 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -124,6 +127,15 @@
 				B78E3DEC1926A5120020B9D4 /* PresentingAnimator */,
 			);
 			name = Animator;
+			sourceTree = "<group>";
+		};
+		B7805EDA1928A37400CF997E /* ConstraintsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7805EDB1928A42600CF997E /* ConstraintsViewController.h */,
+				B7805EDC1928A42600CF997E /* ConstraintsViewController.m */,
+			);
+			name = ConstraintsViewController;
 			sourceTree = "<group>";
 		};
 		B785AD0819196A2D00621820 = {
@@ -265,6 +277,7 @@
 		B7FF965B191EB5D900087016 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B7805EDA1928A37400CF997E /* ConstraintsViewController */,
 				B78E3DE81926A1300020B9D4 /* ModalViewController */,
 				B70458311923DB0000CF6961 /* CustomTransitionViewController */,
 				B7ECD7471921146A007F9116 /* PaperButtonViewController */,
@@ -454,6 +467,7 @@
 				B7ECD74A19211489007F9116 /* PaperButtonViewController.m in Sources */,
 				B7FF9668191EBADD00087016 /* AnimationsListViewController.m in Sources */,
 				B7FF9674191FAF1900087016 /* PanViewController.m in Sources */,
+				B7805EDD1928A42600CF997E /* ConstraintsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
