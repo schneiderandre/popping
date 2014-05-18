@@ -11,12 +11,9 @@
 
 #import "POPAnimation.h"
 #import "POPAnimationRuntime.h"
-#import "POPAnimationTracer.h"
 #import "POPAnimationTracerInternal.h"
 #import "POPSpringSolver.h"
-#import "POPVector.h"
 #import "POPAction.h"
-#import "POPMath.h"
 
 using namespace POP;
 
@@ -310,11 +307,6 @@ struct _POPAnimationState
       active = true;
       setPaused(false);
       
-      // start us one frame in the past (when we added the animation)
-      if (0 == beginTime) {
-        time -= 1/60.;
-      }
-      
       // note start time
       startTime = lastTime = time;
       started = true;
@@ -403,10 +395,7 @@ struct _POPAnimationState
   bool advanceTime(CFTimeInterval time, id obj) {
     bool advanced = false;
     bool computedProgress = false;
-    
     CFTimeInterval dt = time - lastTime;
-    if (dt < 0.001)
-      return advanced;
     
     switch (type) {
       case kPOPAnimationSpring:

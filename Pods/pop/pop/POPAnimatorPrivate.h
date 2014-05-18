@@ -32,6 +32,16 @@
 #endif
 
 /**
+ Used for externally driven animator instances.
+ */
+@property (assign, nonatomic) BOOL disableDisplayLink;
+
+/**
+ Time used when starting animations. Defaults to 0 meaning current media time is used. Exposed for unit testing.
+ */
+@property (assign, nonatomic) CFTimeInterval beginTime;
+
+/**
  Exposed for unit testing.
  */
 - (void)renderTime:(CFTimeInterval)time;

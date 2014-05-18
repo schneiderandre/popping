@@ -27,12 +27,14 @@ static CGFloat const kPOPThresholdPoint = 1.0;
 static CGFloat const kPOPThresholdOpacity = 0.01;
 static CGFloat const kPOPThresholdScale = 0.005;
 static CGFloat const kPOPThresholdRotation = 0.01;
+static CGFloat const kPOPThresholdRadius = 0.01;
 
 #pragma mark - Static
 
 // CALayer
 NSString * const kPOPLayerBackgroundColor = @"backgroundColor";
 NSString * const kPOPLayerBounds = @"bounds";
+NSString * const kPOPLayerCornerRadius = @"cornerRadius";
 NSString * const kPOPLayerOpacity = @"opacity";
 NSString * const kPOPLayerPosition = @"position";
 NSString * const kPOPLayerPositionX = @"positionX";
@@ -54,6 +56,10 @@ NSString * const kPOPLayerTranslationXY = @"translationXY";
 NSString * const kPOPLayerTranslationY = @"translationY";
 NSString * const kPOPLayerTranslationZ = @"translationZ";
 NSString * const kPOPLayerZPosition = @"zPosition";
+NSString * const kPOPLayerShadowColor = @"shadowColor";
+NSString * const kPOPLayerShadowOffset = @"shadowOffset";
+NSString * const kPOPLayerShadowOpacity = @"shadowOpacity";
+NSString * const kPOPLayerShadowRadius = @"shadowRadius";
 
 // CAShapeLayer
 NSString * const kPOPShapeLayerStrokeStart = @"shapeLayer.strokeStart";
@@ -77,6 +83,7 @@ NSString * const kPOPViewSize = kPOPLayerSize;
 // UIScrollView
 NSString * const kPOPScrollViewContentOffset = @"scrollView.contentOffset";
 NSString * const kPOPScrollViewContentSize = @"scrollView.contentSize";
+NSString * const kPOPScrollViewZoomScale = @"scrollView.zoomScale";
 
 // UITableView
 NSString * const kPOPTableViewContentOffset = kPOPScrollViewContentOffset;
@@ -85,8 +92,14 @@ NSString * const kPOPTableViewContentSize = kPOPScrollViewContentSize;
 // UINavigationBar
 NSString * const kPOPNavigationBarBarTintColor = @"navigationBar.barTintColor";
 
+// UIToolbar
+NSString * const kPOPToolbarBarTintColor = kPOPNavigationBarBarTintColor;
+
 // UITabBar
 NSString * const kPOPTabBarBarTintColor = kPOPNavigationBarBarTintColor;
+
+//UILabel
+NSString * const kPOPLabelTextColor = @"label.textColor";
 
 /**
  State structure internal to static animatable property.
@@ -103,7 +116,7 @@ typedef _POPStaticAnimatablePropertyState POPStaticAnimatablePropertyState;
 static POPStaticAnimatablePropertyState _staticStates[] =
 {
   /* CALayer */
-  
+
   {kPOPLayerBackgroundColor,
     ^(CALayer *obj, CGFloat values[]) {
       POPCGColorGetRGBAComponents(obj.backgroundColor, values);
@@ -124,6 +137,16 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       [obj setBounds:values_to_rect(values)];
     },
     kPOPThresholdPoint
+  },
+
+  {kPOPLayerCornerRadius,
+    ^(CALayer *obj, CGFloat values[]) {
+        values[0] = [obj cornerRadius];
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        [obj setCornerRadius:values[0]];
+    },
+    kPOPThresholdRadius
   },
 
   {kPOPLayerPosition,
@@ -345,9 +368,52 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     kPOPThresholdRotation
   },
-  
+
+  {kPOPLayerShadowColor,
+    ^(CALayer *obj, CGFloat values[]) {
+        POPCGColorGetRGBAComponents(obj.shadowColor, values);
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        CGColorRef color = POPCGColorRGBACreate(values);
+        [obj setShadowColor:color];
+        CGColorRelease(color);
+    },
+    0.01
+  },
+
+  {kPOPLayerShadowOffset,
+    ^(CALayer *obj, CGFloat values[]) {
+        values_from_size(values, [obj shadowOffset]);
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        CGSize size = values_to_size(values);
+        [obj setShadowOffset:size];
+    },
+    0.01
+  },
+
+  {kPOPLayerShadowOpacity,
+    ^(CALayer *obj, CGFloat values[]) {
+        values[0] = [obj shadowOpacity];
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        [obj setShadowOpacity:values[0]];
+    },
+    0.01
+  },
+
+  {kPOPLayerShadowRadius,
+    ^(CALayer *obj, CGFloat values[]) {
+        values[0] = [obj shadowRadius];
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        [obj setShadowRadius:values[0]];
+    },
+    kPOPThresholdRadius
+  },
+
   /* CAShapeLayer */
-  
+
   {kPOPShapeLayerStrokeStart,
     ^(CAShapeLayer *obj, CGFloat values[]) {
       values[0] = obj.strokeStart;
@@ -367,7 +433,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     0.01
   },
-    
+
   {kPOPShapeLayerStrokeColor,
     ^(CAShapeLayer *obj, CGFloat values[]) {
         POPCGColorGetRGBAComponents(obj.strokeColor, values);
@@ -391,9 +457,9 @@ static POPStaticAnimatablePropertyState _staticStates[] =
   },
 
 #if TARGET_OS_IPHONE
-  
+
   /* UIView */
-  
+
   {kPOPViewAlpha,
     ^(UIView *obj, CGFloat values[]) {
       values[0] = obj.alpha;
@@ -463,9 +529,9 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     kPOPThresholdScale
   },
-  
+
   /* UIScrollView */
-  
+
   {kPOPScrollViewContentOffset,
     ^(UIScrollView *obj, CGFloat values[]) {
       values_from_point(values, obj.contentOffset);
@@ -485,15 +551,37 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     kPOPThresholdPoint
   },
-  
-  /* UINavigationBar */
     
+  {kPOPScrollViewZoomScale,
+    ^(UIScrollView *obj, CGFloat values[]) {
+      values[0]=obj.zoomScale;
+    },
+    ^(UIScrollView *obj, const CGFloat values[]) {
+      obj.zoomScale=values[0];
+    },
+    kPOPThresholdScale
+  },
+
+  /* UINavigationBar */
+
   {kPOPNavigationBarBarTintColor,
     ^(UINavigationBar *obj, CGFloat values[]) { 
       POPUIColorGetRGBAComponents(obj.barTintColor, values);
     },
     ^(UINavigationBar *obj, const CGFloat values[]) {
       obj.barTintColor = POPUIColorRGBACreate(values);
+    },
+    kPOPThresholdColor
+  },
+
+  /* UILabel */
+
+  {kPOPLabelTextColor,
+    ^(UILabel *obj, CGFloat values[]) {
+      POPUIColorGetRGBAComponents(obj.textColor, values);
+    },
+    ^(UILabel *obj, const CGFloat values[]) {
+      obj.textColor = POPUIColorRGBACreate(values);
     },
     kPOPThresholdColor
   },

@@ -25,7 +25,7 @@ static void interpolate(POPValueType valueType, NSUInteger count, const CGFloat 
     case kPOPValueSize:
     case kPOPValueRect:
     case kPOPValueColor:
-      interpolate_vector(count, outVec, fromVec, toVec, p);
+      POPInterpolateVector(count, outVec, fromVec, toVec, p);
       break;
     default:
       NSCAssert(false, @"unhandled type %d", valueType);
@@ -41,10 +41,10 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
 
   _POPBasicAnimationState(id __unsafe_unretained anim) : _POPPropertyAnimationState(anim),
   duration(kPOPAnimationDurationDefault),
-  timingFunction(nil)
+  timingFunction(nil),
+  timingControlPoints{0.}
   {
     type = kPOPAnimationBasic;
-    memset(timingControlPoints, 0, sizeof(timingControlPoints));
   }
 
   bool isDone() {
@@ -56,7 +56,7 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
 
   void updatedTimingFunction()
   {
-    float vec[4] = {0., 0., 0., 0.};
+    float vec[4] = {0.};
     [timingFunction getControlPointAtIndex:1 values:&vec[0]];
     [timingFunction getControlPointAtIndex:2 values:&vec[2]];
     for (NSUInteger idx = 0; idx < POP_ARRAY_COUNT(vec); idx++) {
@@ -74,18 +74,14 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
     CFTimeInterval t = MIN(time - startTime, duration) / duration;
 
     // solve for normalized time, aka progresss [0, 1]
-    double p = timing_function_solve(timingControlPoints, t, SOLVE_EPS(duration));
+    double p = POPTimingFunctionSolve(timingControlPoints, t, SOLVE_EPS(duration));
 
     // interpolate and advance
-    if (p != progress) {
-      interpolate(valueType, valueCount, fromVec->data(), toVec->data(), currentVec->data(), p);
-      progress = p;
-      return true;
-    }
-
+    interpolate(valueType, valueCount, fromVec->data(), toVec->data(), currentVec->data(), p);
+    progress = p;
     clampCurrentValue();
 
-    return false;
+    return true;
   }
 };
 
