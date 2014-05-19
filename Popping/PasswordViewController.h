@@ -1,5 +1,5 @@
 //
-//  ShapeLayerViewController.h
+//  PasswordViewController.h
 //  Popping
 //
 //  Created by André Schneider on 18.05.14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShapeLayerViewController : UIViewController
+@interface PasswordViewController : UIViewController
 
 @end
