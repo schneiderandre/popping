@@ -12,6 +12,7 @@
 #import "PaperButtonViewController.h"
 #import "CustomTransitionViewController.h"
 #import "PasswordViewController.h"
+#import "ConstraintsViewController.h"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -31,7 +32,8 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
                    @[@"Pan Animation", [PanViewController class]],
                    @[@"Paper Button Animation", [PaperButtonViewController class]],
                    @[@"Custom Transition", [CustomTransitionViewController class]],
-                   @[@"Password Indicator Animation", [PasswordViewController class]]
+                   @[@"Password Indicator Animation", [PasswordViewController class]],
+                   @[@"Constraints Animation", [ConstraintsViewController class]]
                    ];
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:kCellIdentifier];
