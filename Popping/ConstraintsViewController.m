@@ -33,7 +33,7 @@
 
 - (void)addBarButton
 {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Reorder"
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Shuffle"
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(updateConstraints:)];
