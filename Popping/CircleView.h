@@ -10,4 +10,6 @@
 
 @interface CircleView : UIView
 
+- (void)animateToStrokeEnd:(CGFloat)strokeEnd;
+
 @end

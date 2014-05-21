@@ -7,8 +7,10 @@
 //
 
 #import "CircleView.h"
+#import <POP/POP.h>
 
 @interface CircleView()
+@property(nonatomic) CAShapeLayer *circleLayer;
 - (void)addCircleLayer;
 @end
 
@@ -24,28 +26,37 @@
     return self;
 }
 
+
+- (void)animateToStrokeEnd:(CGFloat)strokeEnd
+{
+    POPSpringAnimation *strokeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPShapeLayerStrokeEnd];
+    strokeAnimation.toValue = @(strokeEnd);
+    strokeAnimation.springBounciness = 12.f;
+    [self.circleLayer pop_addAnimation:strokeAnimation forKey:@"layerStrokeAnimation"];
+}
+
 #pragma mark - Private Instance methods
 
 - (void)addCircleLayer
 {
     CGFloat lineWidth = 10.f;
     CGFloat radius = CGRectGetWidth(self.bounds)/2 - lineWidth/2;
-    CAShapeLayer *circleLayer = [CAShapeLayer layer];
+    self.circleLayer = [CAShapeLayer layer];
     CGRect rect = CGRectMake(lineWidth/2, lineWidth/2, radius * 2, radius * 2);
-    circleLayer.path = [UIBezierPath bezierPathWithRoundedRect:rect
+    self.circleLayer.path = [UIBezierPath bezierPathWithRoundedRect:rect
                                                   cornerRadius:radius].CGPath;
 
-    circleLayer.strokeColor = [UIColor colorWithRed:46/255.f
+    self.circleLayer.strokeColor = [UIColor colorWithRed:46/255.f
                                               green:204/255.f
                                                blue:113/255.f
                                               alpha:1.000].CGColor;
-    circleLayer.fillColor = nil;
-    circleLayer.lineWidth = lineWidth;
-    circleLayer.strokeEnd = 1.f;
-    circleLayer.lineCap = kCALineCapRound;
-    circleLayer.lineJoin = kCALineJoinRound;
+    self.circleLayer.fillColor = nil;
+    self.circleLayer.lineWidth = lineWidth;
+    self.circleLayer.strokeEnd = 1.f;
+    self.circleLayer.lineCap = kCALineCapRound;
+    self.circleLayer.lineJoin = kCALineJoinRound;
 
-    [self.layer addSublayer:circleLayer];
+    [self.layer addSublayer:self.circleLayer];
 }
 
 @end
