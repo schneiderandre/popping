@@ -13,6 +13,7 @@
 #import "CustomTransitionViewController.h"
 #import "PasswordViewController.h"
 #import "ConstraintsViewController.h"
+#import "CircleViewController.h"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -32,6 +33,7 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
                    @[@"Pan Animation", [PanViewController class]],
                    @[@"Paper Button Animation", [PaperButtonViewController class]],
                    @[@"Custom Transition", [CustomTransitionViewController class]],
+                   @[@"Circle Animation", [CircleViewController class]],
                    @[@"Password Indicator Animation", [PasswordViewController class]],
                    @[@"Constraints Animation", [ConstraintsViewController class]]
                    ];

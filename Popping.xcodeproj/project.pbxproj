@@ -27,6 +27,7 @@
 		B785AD3A19196A2D00621820 /* PoppingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B785AD3919196A2D00621820 /* PoppingTests.m */; };
 		B78E3DEB1926A1450020B9D4 /* ModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E3DEA1926A1450020B9D4 /* ModalViewController.m */; };
 		B78E3DF01926A57D0020B9D4 /* DismissingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E3DEF1926A57D0020B9D4 /* DismissingAnimator.m */; };
+		B79B5C1F192D349B00A82EEB /* CircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B79B5C1E192D349B00A82EEB /* CircleViewController.m */; };
 		B7ECD74A19211489007F9116 /* PaperButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD74919211489007F9116 /* PaperButtonViewController.m */; };
 		B7ECD74F192115EF007F9116 /* PaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD74E192115EF007F9116 /* PaperButton.m */; };
 		B7ECD754192120D4007F9116 /* FlatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD753192120D4007F9116 /* FlatButton.m */; };
@@ -76,6 +77,8 @@
 		B78E3DEA1926A1450020B9D4 /* ModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalViewController.m; sourceTree = "<group>"; };
 		B78E3DEE1926A57D0020B9D4 /* DismissingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissingAnimator.h; sourceTree = "<group>"; };
 		B78E3DEF1926A57D0020B9D4 /* DismissingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissingAnimator.m; sourceTree = "<group>"; };
+		B79B5C1D192D349B00A82EEB /* CircleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleViewController.h; sourceTree = "<group>"; };
+		B79B5C1E192D349B00A82EEB /* CircleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleViewController.m; sourceTree = "<group>"; };
 		B7ECD74819211489007F9116 /* PaperButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperButtonViewController.h; sourceTree = "<group>"; };
 		B7ECD74919211489007F9116 /* PaperButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperButtonViewController.m; sourceTree = "<group>"; };
 		B7ECD74D192115EF007F9116 /* PaperButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperButton.h; sourceTree = "<group>"; };
@@ -262,6 +265,15 @@
 			name = DismissingAnimator;
 			sourceTree = "<group>";
 		};
+		B79B5C1C192D348500A82EEB /* CircleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B79B5C1D192D349B00A82EEB /* CircleViewController.h */,
+				B79B5C1E192D349B00A82EEB /* CircleViewController.m */,
+			);
+			name = CircleViewController;
+			sourceTree = "<group>";
+		};
 		B7ECD7471921146A007F9116 /* PaperButtonViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +314,7 @@
 		B7FF965B191EB5D900087016 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B79B5C1C192D348500A82EEB /* CircleViewController */,
 				B7711664192AA56A0078DFD7 /* ConstraintsViewController */,
 				B7805EDE1929028500CF997E /* PasswordViewController */,
 				B78E3DE81926A1300020B9D4 /* ModalViewController */,
@@ -483,6 +496,7 @@
 			files = (
 				B7ECD74F192115EF007F9116 /* PaperButton.m in Sources */,
 				B7711667192AA5870078DFD7 /* ConstraintsViewController.m in Sources */,
+				B79B5C1F192D349B00A82EEB /* CircleViewController.m in Sources */,
 				B7FF966C191EBF6900087016 /* ButtonViewController.m in Sources */,
 				B7ECD754192120D4007F9116 /* FlatButton.m in Sources */,
 				B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */,
