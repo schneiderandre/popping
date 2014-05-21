@@ -13,6 +13,7 @@
 @property(nonatomic) CircleView *circleView;
 - (void)addCircleView;
 - (void)addSlider;
+- (void)sliderChanged:(UISlider *)slider;
 @end
 
 @implementation CircleViewController
@@ -39,7 +40,9 @@
 - (void)addSlider
 {
     UISlider *slider = [UISlider new];
+    slider.value = 0.7f;
     slider.translatesAutoresizingMaskIntoConstraints = NO;
+    [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:slider];
     NSDictionary *views = NSDictionaryOfVariableBindings(slider, _circleView);
 
@@ -52,6 +55,11 @@
                                                                       options:0
                                                                       metrics:nil
                                                                         views:views]];
+}
+
+- (void)sliderChanged:(UISlider *)slider
+{
+    [self.circleView animateToStrokeEnd:slider.value];
 }
 
 @end

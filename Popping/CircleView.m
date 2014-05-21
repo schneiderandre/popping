@@ -52,7 +52,7 @@
                                               alpha:1.000].CGColor;
     self.circleLayer.fillColor = nil;
     self.circleLayer.lineWidth = lineWidth;
-    self.circleLayer.strokeEnd = 1.f;
+    self.circleLayer.strokeEnd = 0.7f;
     self.circleLayer.lineCap = kCALineCapRound;
     self.circleLayer.lineJoin = kCALineJoinRound;
 
