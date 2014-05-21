@@ -10,7 +10,9 @@
 #import "CircleView.h"
 
 @interface CircleViewController()
+@property(nonatomic) CircleView *circleView;
 - (void)addCircleView;
+- (void)addSlider;
 @end
 
 @implementation CircleViewController
@@ -20,6 +22,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self addCircleView];
+    [self addSlider];
 }
 
 #pragma mark - Circle View Controller
@@ -27,10 +30,28 @@
 - (void)addCircleView
 {
     CGRect frame = CGRectMake(0.f, 0.f, 200.f, 200.f);
-    CircleView *circleView = [[CircleView alloc] initWithFrame:frame];
-    circleView.center = self.view.center;
+    self.circleView = [[CircleView alloc] initWithFrame:frame];
+    self.circleView.center = self.view.center;
 
-    [self.view addSubview:circleView];
+    [self.view addSubview:self.circleView];
+}
+
+- (void)addSlider
+{
+    UISlider *slider = [UISlider new];
+    slider.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:slider];
+    NSDictionary *views = NSDictionaryOfVariableBindings(slider, _circleView);
+
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_circleView]-(20)-[slider]"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:views]];
+
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[slider]-|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:views]];
 }
 
 @end
