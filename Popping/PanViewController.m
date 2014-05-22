@@ -9,13 +9,25 @@
 #import "PanViewController.h"
 #import <POP/POP.h>
 
+@interface PanViewController()
+- (void)addPanView;
+- (void)touchDown:(UIControl *)sender;
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer;
+@end
+
 @implementation PanViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self addPanView];
+}
 
+#pragma mark - Private Instance methods
+
+- (void)addPanView
+{
     UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(handlePan:)];
 
