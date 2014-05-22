@@ -10,6 +10,7 @@
 		74CC34E42E0A4A91BF6C604C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D41116F6FC8F4542BD5F61B1 /* libPods.a */; };
 		B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458331923DB2100CF6961 /* CustomTransitionViewController.m */; };
 		B70458381923DE2500CF6961 /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458371923DE2500CF6961 /* PresentingAnimator.m */; };
+		B7388F0C192E9F13000E6941 /* DecayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7388F0B192E9F13000E6941 /* DecayViewController.m */; };
 		B7711667192AA5870078DFD7 /* ConstraintsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7711666192AA5870078DFD7 /* ConstraintsViewController.m */; };
 		B7805EE1192902A900CF997E /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7805EE0192902A900CF997E /* PasswordViewController.m */; };
 		B7805EE51929141100CF997E /* PasswordStrengthIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7805EE41929141100CF997E /* PasswordStrengthIndicatorView.m */; };
@@ -52,6 +53,8 @@
 		B70458331923DB2100CF6961 /* CustomTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTransitionViewController.m; sourceTree = "<group>"; };
 		B70458361923DE2500CF6961 /* PresentingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentingAnimator.h; sourceTree = "<group>"; };
 		B70458371923DE2500CF6961 /* PresentingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentingAnimator.m; sourceTree = "<group>"; };
+		B7388F0A192E9F13000E6941 /* DecayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecayViewController.h; sourceTree = "<group>"; };
+		B7388F0B192E9F13000E6941 /* DecayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DecayViewController.m; sourceTree = "<group>"; };
 		B7711665192AA5870078DFD7 /* ConstraintsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintsViewController.h; sourceTree = "<group>"; };
 		B7711666192AA5870078DFD7 /* ConstraintsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintsViewController.m; sourceTree = "<group>"; };
 		B7805EDF192902A900CF997E /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
@@ -141,6 +144,15 @@
 			name = Animator;
 			sourceTree = "<group>";
 		};
+		B7388F09192E9ED4000E6941 /* DecayViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7388F0A192E9F13000E6941 /* DecayViewController.h */,
+				B7388F0B192E9F13000E6941 /* DecayViewController.m */,
+			);
+			name = DecayViewController;
+			sourceTree = "<group>";
+		};
 		B7711664192AA56A0078DFD7 /* ConstraintsViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,8 +217,8 @@
 			children = (
 				B70458351923DE0D00CF6961 /* Animator */,
 				B7ECD74B192115D8007F9116 /* Controls */,
-				B7FF965B191EB5D900087016 /* View Controller */,
 				B785AD1B19196A2D00621820 /* Supporting Files */,
+				B7FF965B191EB5D900087016 /* View Controller */,
 			);
 			path = Popping;
 			sourceTree = "<group>";
@@ -327,16 +339,17 @@
 		B7FF965B191EB5D900087016 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B79B5C1C192D348500A82EEB /* CircleViewController */,
-				B7711664192AA56A0078DFD7 /* ConstraintsViewController */,
-				B7805EDE1929028500CF997E /* PasswordViewController */,
-				B78E3DE81926A1300020B9D4 /* ModalViewController */,
-				B70458311923DB0000CF6961 /* CustomTransitionViewController */,
-				B7ECD7471921146A007F9116 /* PaperButtonViewController */,
-				B7FF9671191FAF0900087016 /* PanViewController */,
-				B7FF9669191EBF3F00087016 /* ButtonViewController */,
 				B7FF965E191EB63700087016 /* AnimationListViewController */,
 				B7FF965C191EB5E300087016 /* AppDelegate */,
+				B7FF9669191EBF3F00087016 /* ButtonViewController */,
+				B79B5C1C192D348500A82EEB /* CircleViewController */,
+				B7711664192AA56A0078DFD7 /* ConstraintsViewController */,
+				B70458311923DB0000CF6961 /* CustomTransitionViewController */,
+				B7388F09192E9ED4000E6941 /* DecayViewController */,
+				B78E3DE81926A1300020B9D4 /* ModalViewController */,
+				B7FF9671191FAF0900087016 /* PanViewController */,
+				B7ECD7471921146A007F9116 /* PaperButtonViewController */,
+				B7805EDE1929028500CF997E /* PasswordViewController */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -516,6 +529,7 @@
 				B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */,
 				B7805EE51929141100CF997E /* PasswordStrengthIndicatorView.m in Sources */,
 				B70458381923DE2500CF6961 /* PresentingAnimator.m in Sources */,
+				B7388F0C192E9F13000E6941 /* DecayViewController.m in Sources */,
 				B78E3DEB1926A1450020B9D4 /* ModalViewController.m in Sources */,
 				B785AD2519196A2D00621820 /* AppDelegate.m in Sources */,
 				B785AD2119196A2D00621820 /* main.m in Sources */,

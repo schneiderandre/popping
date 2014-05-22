@@ -14,6 +14,7 @@
 #import "PasswordViewController.h"
 #import "ConstraintsViewController.h"
 #import "CircleViewController.h"
+#import "DecayViewController.h"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -31,6 +32,7 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
     self.title = @"Popping";
     self.items = @[@[@"Button Animation", [ButtonViewController class]],
                    @[@"Pan Animation", [PanViewController class]],
+                   @[@"Decay Animation", [DecayViewController class]],
                    @[@"Paper Button Animation", [PaperButtonViewController class]],
                    @[@"Custom Transition", [CustomTransitionViewController class]],
                    @[@"Circle Animation", [CircleViewController class]],
