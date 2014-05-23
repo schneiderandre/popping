@@ -9,7 +9,8 @@
 #import "DecayViewController.h"
 #import <POP/POP.h>
 
-@interface DecayViewController()
+@interface DecayViewController() <POPAnimationDelegate>
+@property(nonatomic) UIControl *dragView;
 - (void)addDragView;
 - (void)touchDown:(UIControl *)sender;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
@@ -24,6 +25,22 @@
     [self addDragView];
 }
 
+#pragma mark - POPAnimationDelegate
+
+- (void)pop_animationDidApply:(POPDecayAnimation *)anim
+{
+    BOOL dragViewIsOutsideSuperView = !CGRectContainsRect(self.view.frame, self.dragView.frame);
+    if (dragViewIsOutsideSuperView) {
+        CGPoint currentVelocity = [[anim valueForKeyPath:@"velocity"] CGPointValue];
+        CGPoint velocity = CGPointMake(currentVelocity.x, -currentVelocity.y);
+        if (CGRectGetMinX(self.dragView.frame) < CGRectGetMinX(self.view.bounds) ||
+            CGRectGetMaxX(self.dragView.frame) > CGRectGetMaxX(self.view.bounds)) {
+            velocity = CGPointMake(-currentVelocity.x, currentVelocity.y);
+        }
+        anim.velocity = [NSValue valueWithCGPoint:velocity];
+    }
+}
+
 #pragma mark - Private Instance methods
 
 - (void)addDragView
@@ -31,17 +48,18 @@
     UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(handlePan:)];
 
-    UIControl *dragView = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    dragView.center = self.view.center;
-    dragView.backgroundColor = [UIColor colorWithRed:46/255.f
+    self.dragView = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    self.dragView.center = self.view.center;
+    self.dragView.layer.cornerRadius = CGRectGetWidth(self.dragView.bounds)/2;
+    self.dragView.backgroundColor = [UIColor colorWithRed:46/255.f
                                               green:204/255.f
                                                blue:113/255.f
                                               alpha:1.000];
 
-    [dragView addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
-    [dragView addGestureRecognizer:recognizer];
+    [self.dragView addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
+    [self.dragView addGestureRecognizer:recognizer];
 
-    [self.view addSubview:dragView];
+    [self.view addSubview:self.dragView];
 }
 
 - (void)touchDown:(UIControl *)sender {
@@ -58,6 +76,7 @@
     if(recognizer.state == UIGestureRecognizerStateEnded) {
         CGPoint velocity = [recognizer velocityInView:self.view];
         POPDecayAnimation *positionAnimation = [POPDecayAnimation animationWithPropertyNamed:kPOPLayerPosition];
+        positionAnimation.delegate = self;
         positionAnimation.velocity = [NSValue valueWithCGPoint:velocity];
         [recognizer.view.layer pop_addAnimation:positionAnimation forKey:@"layerPositionAnimation"];
     }
