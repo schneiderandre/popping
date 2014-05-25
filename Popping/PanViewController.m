@@ -17,6 +17,7 @@
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
 
 - (void)scaleDownView:(UIView *)view;
+- (void)scaleUpView:(UIView *)view;
 @end
 
 @implementation PanViewController
@@ -35,15 +36,24 @@
     UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(handlePan:)];
 
-    UIControl *panView = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, 100, 75)];
+    CGFloat width = CGRectGetWidth(self.view.bounds) - 20.f;
+    CGFloat height = roundf(width*0.75f);
+    UIControl *panView = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, width, height)];
     panView.center = self.view.center;
-    panView.layer.cornerRadius = 2.f;
+    panView.layer.cornerRadius = 5.f;
+    panView.layer.masksToBounds = YES;
     panView.backgroundColor = [UIColor customGreenColor];
+
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:panView.bounds];
+    [imageView setImage:[UIImage imageNamed:@"boat.jpg"]];
+    [panView addSubview:imageView];
+
     [panView addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
     [panView addTarget:self action:@selector(touchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [panView addGestureRecognizer:recognizer];
 
     [self.view addSubview:panView];
+    [self scaleDownView:panView];
 }
 
 - (void)touchDown:(UIControl *)sender {
@@ -51,17 +61,11 @@
 }
 
 - (void)touchUpInside:(UIControl *)sender {
-    if (sender.layer.affineTransform.a > 1) {
+    if (sender.layer.affineTransform.a == 1) {
         [self scaleDownView:sender];
         return;
     }
-    POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    positionAnimation.toValue = [NSValue valueWithCGPoint:self.view.center];
-    [sender.layer pop_addAnimation:positionAnimation forKey:@"layerPositionAnimation"];
-
-    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(3, 3)];
-    [sender.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
+    [self scaleUpView:sender];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
@@ -84,10 +88,21 @@
     }
 }
 
+-(void)scaleUpView:(UIView *)view
+{
+    POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+    positionAnimation.toValue = [NSValue valueWithCGPoint:self.view.center];
+    [view.layer pop_addAnimation:positionAnimation forKey:@"layerPositionAnimation"];
+
+    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1, 1)];
+    [view.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
+}
+
 - (void)scaleDownView:(UIView *)view
 {
     POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1, 1)];
+    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
     [view.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
 }
 
