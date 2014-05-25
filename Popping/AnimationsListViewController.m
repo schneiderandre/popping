@@ -16,6 +16,7 @@
 #import "CircleViewController.h"
 #import "DecayViewController.h"
 #import "MenuTableViewCell.h"
+#import "UIColor+CustomColors.m"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -23,6 +24,8 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 @property(nonatomic) NSArray *items;
 - (NSString *)titleForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (UIViewController *)viewControllerForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)configureTableView;
+- (void)configureTitleView;
 @end
 
 @implementation AnimationsListViewController
@@ -31,19 +34,8 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 {
     [super viewDidLoad];
     self.title = @"Popping";
-    self.items = @[@[@"Button Animation", [ButtonViewController class]],
-                   @[@"Decay Animation", [DecayViewController class]],
-                   @[@"Circle Animation", [CircleViewController class]],
-                   @[@"Image Animation", [PanViewController class]],
-                   @[@"Custom Transition", [CustomTransitionViewController class]],
-                   @[@"Paper Button Animation", [PaperButtonViewController class]],
-                   @[@"Password Indicator Animation", [PasswordViewController class]],
-                   @[@"Constraints Animation", [ConstraintsViewController class]]
-                   ];
-    [self.tableView registerClass:[MenuTableViewCell class]
-           forCellReuseIdentifier:kCellIdentifier];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.rowHeight = 50.f;
+    [self configureTableView];
+    [self configureTitleView];
 }
 
 #pragma mark - Table view delegate
@@ -72,6 +64,45 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 }
 
 #pragma mark - Private Instance methods
+
+- (void)configureTableView
+{
+    self.items = @[@[@"Button Animation", [ButtonViewController class]],
+                   @[@"Decay Animation", [DecayViewController class]],
+                   @[@"Circle Animation", [CircleViewController class]],
+                   @[@"Image Animation", [PanViewController class]],
+                   @[@"Custom Transition", [CustomTransitionViewController class]],
+                   @[@"Paper Button Animation", [PaperButtonViewController class]],
+                   @[@"Password Indicator Animation", [PasswordViewController class]],
+                   @[@"Constraints Animation", [ConstraintsViewController class]]
+                   ];
+    [self.tableView registerClass:[MenuTableViewCell class]
+           forCellReuseIdentifier:kCellIdentifier];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.rowHeight = 50.f;
+}
+
+- (void)configureTitleView
+{
+    UILabel *headlinelabel = [UILabel new];
+    headlinelabel.font = [UIFont fontWithName:@"HelveticaNeue" size:24];
+    headlinelabel.textAlignment = NSTextAlignmentCenter;
+    headlinelabel.textColor = [UIColor customBlueColor];
+
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.title];
+    [attributedString addAttribute:NSFontAttributeName
+                             value:[UIFont fontWithName:@"HelveticaNeue-Light" size:24]
+                             range:NSMakeRange(3, 4)];
+
+    [attributedString addAttribute:NSForegroundColorAttributeName
+                             value:[UIColor lightGrayColor]
+                             range:NSMakeRange(3, 4)];
+
+    headlinelabel.attributedText = attributedString;
+    [headlinelabel sizeToFit];
+
+    [self.navigationItem setTitleView:headlinelabel];
+}
 
 - (NSString *)titleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
