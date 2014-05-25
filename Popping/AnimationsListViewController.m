@@ -15,7 +15,7 @@
 #import "ConstraintsViewController.h"
 #import "CircleViewController.h"
 #import "DecayViewController.h"
-#import "UIColor+CustomColors.h"
+#import "MenuTableViewCell.h"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -40,8 +40,10 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
                    @[@"Password Indicator Animation", [PasswordViewController class]],
                    @[@"Constraints Animation", [ConstraintsViewController class]]
                    ];
-    [self.tableView registerClass:[UITableViewCell class]
+    [self.tableView registerClass:[MenuTableViewCell class]
            forCellReuseIdentifier:kCellIdentifier];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.rowHeight = 50.f;
 }
 
 #pragma mark - Table view delegate
@@ -63,11 +65,9 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier
+    MenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier
                                                             forIndexPath:indexPath];
     cell.textLabel.text = [self.items[indexPath.row] firstObject];
-    cell.textLabel.textColor = [UIColor customGrayColor];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
