@@ -40,7 +40,7 @@
         [transitionContext completeTransition:YES];
     }];
     [fromVC.view.layer pop_addAnimation:offscreenAnimation forKey:@"offscreenAnimation"];
-    [dimmingView.layer pop_addAnimation:opacityAnimation forKey:@"kPOPLayerOpacity"];
+    [dimmingView.layer pop_addAnimation:opacityAnimation forKey:@"opacityAnimation"];
 }
 
 @end
