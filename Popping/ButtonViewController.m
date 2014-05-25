@@ -8,6 +8,7 @@
 
 #import "ButtonViewController.h"
 #import "FlatButton.h"
+#import "UIColor+CustomColors.h"
 
 @implementation ButtonViewController
 
@@ -17,6 +18,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     FlatButton *flatButton = [FlatButton button];
+    flatButton.backgroundColor = [UIColor customGreenColor];
     flatButton.translatesAutoresizingMaskIntoConstraints = NO;
     [flatButton setTitle:@"Touch me" forState:UIControlStateNormal];
     [self.view addSubview:flatButton];

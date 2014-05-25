@@ -55,10 +55,7 @@
 
 - (void)setup
 {
-    self.backgroundColor = [UIColor colorWithRed:46/255.f
-                                             green:204/255.f
-                                              blue:113/255.f
-                                             alpha:1.000];
+    self.backgroundColor = [UIColor grayColor];
     self.layer.cornerRadius = 4.f;
     [self setTitleColor:[UIColor whiteColor]
                  forState:UIControlStateNormal];
