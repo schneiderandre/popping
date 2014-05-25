@@ -19,6 +19,7 @@
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
 {
     UIView *fromView = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view;
+    fromView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
     fromView.userInteractionEnabled = NO;
 
     UIView *toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
