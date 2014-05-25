@@ -10,6 +10,7 @@
 
 @interface CircleView : UIView
 
+@property(nonatomic) UIColor *strokeColor;
 - (void)animateToStrokeEnd:(CGFloat)strokeEnd;
 
 @end

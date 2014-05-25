@@ -26,7 +26,6 @@
     return self;
 }
 
-
 - (void)animateToStrokeEnd:(CGFloat)strokeEnd
 {
     POPSpringAnimation *strokeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPShapeLayerStrokeEnd];
@@ -46,10 +45,7 @@
     self.circleLayer.path = [UIBezierPath bezierPathWithRoundedRect:rect
                                                   cornerRadius:radius].CGPath;
 
-    self.circleLayer.strokeColor = [UIColor colorWithRed:46/255.f
-                                              green:204/255.f
-                                               blue:113/255.f
-                                              alpha:1.000].CGColor;
+    self.circleLayer.strokeColor = [UIColor grayColor].CGColor;
     self.circleLayer.fillColor = nil;
     self.circleLayer.lineWidth = lineWidth;
     self.circleLayer.strokeEnd = 0.7f;
@@ -57,6 +53,14 @@
     self.circleLayer.lineJoin = kCALineJoinRound;
 
     [self.layer addSublayer:self.circleLayer];
+}
+
+#pragma mark - Peroperty Setter
+
+- (void)setStrokeColor:(UIColor *)strokeColor
+{
+    self.circleLayer.strokeColor = strokeColor.CGColor;
+    _strokeColor = strokeColor;
 }
 
 @end

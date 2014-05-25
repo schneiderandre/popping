@@ -8,6 +8,7 @@
 
 #import "CircleViewController.h"
 #import "CircleView.h"
+#import "UIColor+CustomColors.h"
 
 @interface CircleViewController()
 @property(nonatomic) CircleView *circleView;
@@ -32,6 +33,7 @@
 {
     CGRect frame = CGRectMake(0.f, 0.f, 200.f, 200.f);
     self.circleView = [[CircleView alloc] initWithFrame:frame];
+    self.circleView.strokeColor = [UIColor customGreenColor];
     self.circleView.center = self.view.center;
 
     [self.view addSubview:self.circleView];
@@ -41,12 +43,13 @@
 {
     UISlider *slider = [UISlider new];
     slider.value = 0.7f;
+    slider.tintColor = [UIColor customGreenColor];
     slider.translatesAutoresizingMaskIntoConstraints = NO;
     [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:slider];
     NSDictionary *views = NSDictionaryOfVariableBindings(slider, _circleView);
 
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_circleView]-(20)-[slider]"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_circleView]-(40)-[slider]"
                                                                       options:0
                                                                       metrics:nil
                                                                         views:views]];
