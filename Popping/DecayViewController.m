@@ -29,15 +29,14 @@
 
 - (void)pop_animationDidApply:(POPDecayAnimation *)anim
 {
-    BOOL dragViewIsOutsideSuperView = !CGRectContainsRect(self.view.frame, self.dragView.frame);
-    if (dragViewIsOutsideSuperView) {
+    BOOL isDragViewOutsideOfSuperView = !CGRectContainsRect(self.view.frame, self.dragView.frame);
+    if (isDragViewOutsideOfSuperView) {
         CGPoint currentVelocity = [[anim valueForKeyPath:@"velocity"] CGPointValue];
         CGPoint velocity = CGPointMake(currentVelocity.x, -currentVelocity.y);
-        if (CGRectGetMinX(self.dragView.frame) < CGRectGetMinX(self.view.bounds) ||
-            CGRectGetMaxX(self.dragView.frame) > CGRectGetMaxX(self.view.bounds)) {
-            velocity = CGPointMake(-currentVelocity.x, currentVelocity.y);
-        }
-        anim.velocity = [NSValue valueWithCGPoint:velocity];
+        POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+        positionAnimation.velocity = [NSValue valueWithCGPoint:velocity];
+        positionAnimation.toValue = [NSValue valueWithCGPoint:self.view.center];
+        [self.dragView.layer pop_addAnimation:positionAnimation forKey:@"layerPositionAnimation"];
     }
 }
 
