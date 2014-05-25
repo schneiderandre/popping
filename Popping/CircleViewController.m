@@ -58,11 +58,12 @@
                                                                       options:0
                                                                       metrics:nil
                                                                         views:views]];
+    [self.circleView setStrokeEnd:slider.value animated:NO];
 }
 
 - (void)sliderChanged:(UISlider *)slider
 {
-    [self.circleView animateToStrokeEnd:slider.value];
+    [self.circleView setStrokeEnd:slider.value animated:YES];
 }
 
 @end

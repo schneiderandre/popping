@@ -34,6 +34,14 @@
     [self.circleLayer pop_addAnimation:strokeAnimation forKey:@"layerStrokeAnimation"];
 }
 
+- (void)setStrokeEnd:(CGFloat)strokeEnd animated:(BOOL)animated
+{
+    if (animated) {
+        [self animateToStrokeEnd:strokeEnd];
+    }
+    self.circleLayer.strokeEnd = strokeEnd;
+}
+
 #pragma mark - Private Instance methods
 
 - (void)addCircleLayer
@@ -48,7 +56,6 @@
     self.circleLayer.strokeColor = self.tintColor.CGColor;
     self.circleLayer.fillColor = nil;
     self.circleLayer.lineWidth = lineWidth;
-    self.circleLayer.strokeEnd = 0.7f;
     self.circleLayer.lineCap = kCALineCapRound;
     self.circleLayer.lineJoin = kCALineJoinRound;
 
