@@ -9,11 +9,13 @@
 #import "PaperButtonViewController.h"
 #import "PaperButton.h"
 #import <POP/POP.h>
+#import "UIColor+CustomColors.h"
 
 @interface PaperButtonViewController()
-@property(nonatomic) PaperButton *button;
 @property(nonatomic) UILabel *titleLabel;
 - (void)addControls;
+- (void)addBarButton;
+- (void)addTitleLabel;
 - (void)animateTitleLabel:(id)sender;
 - (void)setTitleLabel;
 @end
@@ -32,27 +34,46 @@
 
 - (void)addControls
 {
-    CGPoint origin = CGPointMake(CGRectGetWidth(self.view.frame) - 56.f, 72.f);
+    [self addBarButton];
+    [self addTitleLabel];
+}
 
-    self.button = [PaperButton buttonWithOrigin:origin];
-    [self.button addTarget:self action:@selector(animateTitleLabel:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.button];
+- (void)addBarButton
+{
+    PaperButton *button = [PaperButton button];
+    [button addTarget:self action:@selector(animateTitleLabel:) forControlEvents:UIControlEventTouchUpInside];
+    button.tintColor = [UIColor customBlueColor];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
 
-    CGFloat titlePadding = 20.f;
-    CGRect titleFrame = CGRectMake(titlePadding,
-                                   origin.y,
-                                   CGRectGetMinX(self.button.frame) - titlePadding*2,
-                                   CGRectGetHeight(self.button.bounds));
+    self.navigationItem.rightBarButtonItem = barButton;
+}
 
-    self.titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
-    self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22.f];
+- (void)addTitleLabel
+{
+    self.titleLabel = [UILabel new];
+    self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.f];
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.textColor = [UIColor customGrayColor];
     [self setTitleLabel];
+    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.titleLabel];
+
+    [self.view addConstraints:[NSLayoutConstraint
+                                     constraintsWithVisualFormat:@"H:|-[_titleLabel]-|"
+                                     options:0
+                                     metrics:nil
+                                     views:NSDictionaryOfVariableBindings(_titleLabel)]];
+
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:|-(80)-[_titleLabel]"
+                               options:0
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(_titleLabel)]];
 }
 
 - (void)animateTitleLabel:(id)sender
 {
-    CGFloat toValue = CGRectGetMinX(self.button.frame) / 2;
+    CGFloat toValue = CGRectGetMidX(self.view.bounds);
 
     POPSpringAnimation *onscreenAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
     onscreenAnimation.toValue = @(toValue);
