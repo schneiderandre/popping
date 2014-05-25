@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AnimationsListViewController.h"
+#import "UIColor+CustomColors.h"
 
 @implementation AppDelegate
 
@@ -21,6 +22,7 @@
 
     [self.window setRootViewController:navigationController];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.tintColor = [UIColor customBlueColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
