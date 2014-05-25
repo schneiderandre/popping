@@ -7,6 +7,7 @@
 //
 
 #import "PasswordStrengthIndicatorView.h"
+#import "UIColor+CustomColors.h"
 
 @interface PasswordStrengthIndicatorView()
 @property(nonatomic) UIView *indicatorView;
@@ -83,11 +84,11 @@
 {
     switch (status) {
         case PasswordStrengthIndicatorViewStatusWeak:
-            return [UIColor redColor];
+            return [UIColor customRedColor];
         case PasswordStrengthIndicatorViewStatusFair:
-            return [UIColor orangeColor];
+            return [UIColor customYellowColor];
         case PasswordStrengthIndicatorViewStatusStrong:
-            return [UIColor greenColor];
+            return [UIColor customGreenColor];
         default:
             return [UIColor whiteColor];
     }
