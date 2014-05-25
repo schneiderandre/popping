@@ -55,7 +55,7 @@
 
 - (void)setup
 {
-    self.backgroundColor = [UIColor grayColor];
+    self.backgroundColor = self.tintColor;
     self.layer.cornerRadius = 4.f;
     [self setTitleColor:[UIColor whiteColor]
                  forState:UIControlStateNormal];

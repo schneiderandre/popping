@@ -45,7 +45,7 @@
     self.circleLayer.path = [UIBezierPath bezierPathWithRoundedRect:rect
                                                   cornerRadius:radius].CGPath;
 
-    self.circleLayer.strokeColor = [UIColor grayColor].CGColor;
+    self.circleLayer.strokeColor = self.tintColor.CGColor;
     self.circleLayer.fillColor = nil;
     self.circleLayer.lineWidth = lineWidth;
     self.circleLayer.strokeEnd = 0.7f;
