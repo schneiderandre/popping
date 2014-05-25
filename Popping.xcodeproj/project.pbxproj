@@ -320,12 +320,11 @@
 		B7ECD74B192115D8007F9116 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				B7F8B063193272490036193C /* ImageView */,
 				B79B5C20192D361600A82EEB /* CircleView */,
 				B7805EE2192913E300CF997E /* PasswordStrengthIndicatorView */,
 				B7ECD751192120C6007F9116 /* FlatButton */,
 				B7ECD74C192115DD007F9116 /* PaperButton */,
-				B7F8B060193270980036193C /* ImageView.h */,
-				B7F8B061193270980036193C /* ImageView.m */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -363,6 +362,15 @@
 				B7F8B05A193232820036193C /* UIColor+CustomColors.m */,
 			);
 			name = UIColor;
+			sourceTree = "<group>";
+		};
+		B7F8B063193272490036193C /* ImageView */ = {
+			isa = PBXGroup;
+			children = (
+				B7F8B060193270980036193C /* ImageView.h */,
+				B7F8B061193270980036193C /* ImageView.m */,
+			);
+			name = ImageView;
 			sourceTree = "<group>";
 		};
 		B7FF965B191EB5D900087016 /* View Controller */ = {
