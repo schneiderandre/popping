@@ -7,6 +7,7 @@
 //
 
 #import "ConstraintsViewController.h"
+#import "UIColor+CustomColors.h"
 
 @interface ConstraintsViewController()
 @property(nonatomic) UIView *redView;
@@ -43,15 +44,15 @@
 - (void)addViews
 {
     self.redView = [UIView new];
-    self.redView.backgroundColor = [UIColor redColor];
+    self.redView.backgroundColor = [UIColor customRedColor];
     self.redView.translatesAutoresizingMaskIntoConstraints = NO;
     self.redView.layer.cornerRadius = 4.f;
     self.greenView = [UIView new];
-    self.greenView.backgroundColor = [UIColor greenColor];
+    self.greenView.backgroundColor = [UIColor customGreenColor];
     self.greenView.translatesAutoresizingMaskIntoConstraints = NO;
     self.greenView.layer.cornerRadius = 4.f;
     self.blueView = [UIView new];
-    self.blueView.backgroundColor = [UIColor blueColor];
+    self.blueView.backgroundColor = [UIColor customYellowColor];
     self.blueView.translatesAutoresizingMaskIntoConstraints = NO;
     self.blueView.layer.cornerRadius = 4.f;
 
