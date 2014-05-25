@@ -15,6 +15,7 @@
 #import "ConstraintsViewController.h"
 #import "CircleViewController.h"
 #import "DecayViewController.h"
+#import "UIColor+CustomColors.h"
 
 static NSString * const kCellIdentifier = @"cellIdentifier";
 
@@ -31,11 +32,11 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
     [super viewDidLoad];
     self.title = @"Popping";
     self.items = @[@[@"Button Animation", [ButtonViewController class]],
-                   @[@"Pan Animation", [PanViewController class]],
                    @[@"Decay Animation", [DecayViewController class]],
-                   @[@"Paper Button Animation", [PaperButtonViewController class]],
-                   @[@"Custom Transition", [CustomTransitionViewController class]],
                    @[@"Circle Animation", [CircleViewController class]],
+                   @[@"Image Animation", [PanViewController class]],
+                   @[@"Custom Transition", [CustomTransitionViewController class]],
+                   @[@"Paper Button Animation", [PaperButtonViewController class]],
                    @[@"Password Indicator Animation", [PasswordViewController class]],
                    @[@"Constraints Animation", [ConstraintsViewController class]]
                    ];
@@ -65,6 +66,7 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier
                                                             forIndexPath:indexPath];
     cell.textLabel.text = [self.items[indexPath.row] firstObject];
+    cell.textLabel.textColor = [UIColor customGrayColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
