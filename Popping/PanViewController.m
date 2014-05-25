@@ -8,6 +8,7 @@
 
 #import "PanViewController.h"
 #import <POP/POP.h>
+#import "UIColor+CustomColors.h"
 
 @interface PanViewController()
 - (void)addPanView;
@@ -34,11 +35,7 @@
     UIControl *panView = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     panView.center = self.view.center;
     panView.layer.cornerRadius = CGRectGetWidth(panView.frame)/2;
-    panView.backgroundColor = [UIColor colorWithRed:46/255.f
-                                              green:204/255.f
-                                               blue:113/255.f
-                                              alpha:1.000];
-
+    panView.backgroundColor = [UIColor customGreenColor];
     [panView addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
     [panView addGestureRecognizer:recognizer];
 

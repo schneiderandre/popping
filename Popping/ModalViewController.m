@@ -7,6 +7,7 @@
 //
 
 #import "ModalViewController.h"
+#import "UIColor+CustomColors.h"
 
 @interface ModalViewController()
 - (void)addDismissButton;
@@ -20,10 +21,7 @@
     [super viewDidLoad];
     
     self.view.layer.cornerRadius = 8.f;
-    self.view.backgroundColor = [UIColor colorWithRed:46/255.f
-                                                green:204/255.f
-                                                 blue:113/255.f
-                                                alpha:1.000];
+    self.view.backgroundColor = [UIColor customGreenColor];
     [self addDismissButton];
 }
 

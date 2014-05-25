@@ -8,6 +8,7 @@
 
 #import "DecayViewController.h"
 #import <POP/POP.h>
+#import "UIColor+CustomColors.h"
 
 @interface DecayViewController() <POPAnimationDelegate>
 @property(nonatomic) UIControl *dragView;
@@ -50,11 +51,7 @@
     self.dragView = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     self.dragView.center = self.view.center;
     self.dragView.layer.cornerRadius = CGRectGetWidth(self.dragView.bounds)/2;
-    self.dragView.backgroundColor = [UIColor colorWithRed:46/255.f
-                                              green:204/255.f
-                                               blue:113/255.f
-                                              alpha:1.000];
-
+    self.dragView.backgroundColor = [UIColor customGreenColor];
     [self.dragView addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
     [self.dragView addGestureRecognizer:recognizer];
 

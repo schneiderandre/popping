@@ -12,7 +12,7 @@
 
 + (UIColor *)customGrayColor
 {
-    return [self colorWithRed:52 green:73 blue:94];
+    return [self colorWithRed:44 green:62 blue:80];
 }
 
 + (UIColor *)customRedColor
