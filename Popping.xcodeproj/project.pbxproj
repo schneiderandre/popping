@@ -33,6 +33,7 @@
 		B7ECD74A19211489007F9116 /* PaperButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD74919211489007F9116 /* PaperButtonViewController.m */; };
 		B7ECD74F192115EF007F9116 /* PaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD74E192115EF007F9116 /* PaperButton.m */; };
 		B7ECD754192120D4007F9116 /* FlatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD753192120D4007F9116 /* FlatButton.m */; };
+		B7F8B05B193232820036193C /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F8B05A193232820036193C /* UIColor+CustomColors.m */; };
 		B7FF9668191EBADD00087016 /* AnimationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FF9667191EBADD00087016 /* AnimationsListViewController.m */; };
 		B7FF966C191EBF6900087016 /* ButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FF966B191EBF6900087016 /* ButtonViewController.m */; };
 		B7FF9674191FAF1900087016 /* PanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FF9673191FAF1900087016 /* PanViewController.m */; };
@@ -91,6 +92,8 @@
 		B7ECD74E192115EF007F9116 /* PaperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperButton.m; sourceTree = "<group>"; };
 		B7ECD752192120D4007F9116 /* FlatButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatButton.h; sourceTree = "<group>"; };
 		B7ECD753192120D4007F9116 /* FlatButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatButton.m; sourceTree = "<group>"; };
+		B7F8B059193232820036193C /* UIColor+CustomColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CustomColors.h"; sourceTree = "<group>"; };
+		B7F8B05A193232820036193C /* UIColor+CustomColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CustomColors.m"; sourceTree = "<group>"; };
 		B7FF9666191EBADD00087016 /* AnimationsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationsListViewController.h; sourceTree = "<group>"; };
 		B7FF9667191EBADD00087016 /* AnimationsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationsListViewController.m; sourceTree = "<group>"; };
 		B7FF966A191EBF6900087016 /* ButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonViewController.h; sourceTree = "<group>"; };
@@ -215,6 +218,7 @@
 		B785AD1A19196A2D00621820 /* Popping */ = {
 			isa = PBXGroup;
 			children = (
+				B7F8B0561932324E0036193C /* Categories */,
 				B70458351923DE0D00CF6961 /* Animator */,
 				B7ECD74B192115D8007F9116 /* Controls */,
 				B785AD1B19196A2D00621820 /* Supporting Files */,
@@ -334,6 +338,23 @@
 				B7ECD753192120D4007F9116 /* FlatButton.m */,
 			);
 			name = FlatButton;
+			sourceTree = "<group>";
+		};
+		B7F8B0561932324E0036193C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				B7F8B057193232530036193C /* UIColor */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		B7F8B057193232530036193C /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				B7F8B059193232820036193C /* UIColor+CustomColors.h */,
+				B7F8B05A193232820036193C /* UIColor+CustomColors.m */,
+			);
+			name = UIColor;
 			sourceTree = "<group>";
 		};
 		B7FF965B191EB5D900087016 /* View Controller */ = {
@@ -528,6 +549,7 @@
 				B7ECD754192120D4007F9116 /* FlatButton.m in Sources */,
 				B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */,
 				B7805EE51929141100CF997E /* PasswordStrengthIndicatorView.m in Sources */,
+				B7F8B05B193232820036193C /* UIColor+CustomColors.m in Sources */,
 				B70458381923DE2500CF6961 /* PresentingAnimator.m in Sources */,
 				B7388F0C192E9F13000E6941 /* DecayViewController.m in Sources */,
 				B78E3DEB1926A1450020B9D4 /* ModalViewController.m in Sources */,
