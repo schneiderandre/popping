@@ -9,6 +9,7 @@
 #import "PanViewController.h"
 #import <POP/POP.h>
 #import "UIColor+CustomColors.h"
+#import "ImageView.h"
 
 @interface PanViewController()
 - (void)addPanView;
@@ -38,22 +39,15 @@
 
     CGFloat width = CGRectGetWidth(self.view.bounds) - 20.f;
     CGFloat height = roundf(width*0.75f);
-    UIControl *panView = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-    panView.center = self.view.center;
-    panView.layer.cornerRadius = 5.f;
-    panView.layer.masksToBounds = YES;
-    panView.backgroundColor = [UIColor customGreenColor];
-
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:panView.bounds];
+    ImageView *imageView = [[ImageView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    imageView.center = self.view.center;
     [imageView setImage:[UIImage imageNamed:@"boat.jpg"]];
-    [panView addSubview:imageView];
+    [imageView addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
+    [imageView addTarget:self action:@selector(touchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [imageView addGestureRecognizer:recognizer];
 
-    [panView addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
-    [panView addTarget:self action:@selector(touchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-    [panView addGestureRecognizer:recognizer];
-
-    [self.view addSubview:panView];
-    [self scaleDownView:panView];
+    [self.view addSubview:imageView];
+    [self scaleDownView:imageView];
 }
 
 - (void)touchDown:(UIControl *)sender {
