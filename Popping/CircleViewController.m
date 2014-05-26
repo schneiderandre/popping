@@ -33,7 +33,7 @@
 {
     CGRect frame = CGRectMake(0.f, 0.f, 200.f, 200.f);
     self.circleView = [[CircleView alloc] initWithFrame:frame];
-    self.circleView.strokeColor = [UIColor customGreenColor];
+    self.circleView.strokeColor = [UIColor customBlueColor];
     self.circleView.center = self.view.center;
 
     [self.view addSubview:self.circleView];
@@ -43,7 +43,7 @@
 {
     UISlider *slider = [UISlider new];
     slider.value = 0.7f;
-    slider.tintColor = [UIColor customGreenColor];
+    slider.tintColor = [UIColor customBlueColor];
     slider.translatesAutoresizingMaskIntoConstraints = NO;
     [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:slider];

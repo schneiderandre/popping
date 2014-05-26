@@ -51,7 +51,7 @@
     self.dragView = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     self.dragView.center = self.view.center;
     self.dragView.layer.cornerRadius = CGRectGetWidth(self.dragView.bounds)/2;
-    self.dragView.backgroundColor = [UIColor customGreenColor];
+    self.dragView.backgroundColor = [UIColor customBlueColor];
     [self.dragView addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
     [self.dragView addGestureRecognizer:recognizer];
 

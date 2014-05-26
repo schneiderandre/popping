@@ -21,7 +21,7 @@
     [super viewDidLoad];
     
     self.view.layer.cornerRadius = 8.f;
-    self.view.backgroundColor = [UIColor customGreenColor];
+    self.view.backgroundColor = [UIColor customBlueColor];
     [self addDismissButton];
 }
 

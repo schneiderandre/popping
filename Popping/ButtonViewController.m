@@ -40,7 +40,7 @@
 - (void)addButton
 {
     self.button = [FlatButton button];
-    self.button.backgroundColor = [UIColor customGreenColor];
+    self.button.backgroundColor = [UIColor customBlueColor];
     self.button.translatesAutoresizingMaskIntoConstraints = NO;
     [self.button setTitle:@"Log in" forState:UIControlStateNormal];
     [self.button addTarget:self action:@selector(touchUpInside:) forControlEvents:UIControlEventTouchUpInside];

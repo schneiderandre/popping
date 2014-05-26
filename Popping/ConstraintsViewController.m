@@ -44,7 +44,7 @@
 - (void)addViews
 {
     self.redView = [UIView new];
-    self.redView.backgroundColor = [UIColor customRedColor];
+    self.redView.backgroundColor = [UIColor customBlueColor];
     self.redView.translatesAutoresizingMaskIntoConstraints = NO;
     self.redView.layer.cornerRadius = 4.f;
     self.greenView = [UIView new];
