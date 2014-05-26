@@ -31,6 +31,7 @@
     POPSpringAnimation *strokeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPShapeLayerStrokeEnd];
     strokeAnimation.toValue = @(strokeEnd);
     strokeAnimation.springBounciness = 12.f;
+    strokeAnimation.removedOnCompletion = NO;
     [self.circleLayer pop_addAnimation:strokeAnimation forKey:@"layerStrokeAnimation"];
 }
 
@@ -38,6 +39,7 @@
 {
     if (animated) {
         [self animateToStrokeEnd:strokeEnd];
+        return;
     }
     self.circleLayer.strokeEnd = strokeEnd;
 }
