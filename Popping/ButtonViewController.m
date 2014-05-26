@@ -106,7 +106,7 @@
     [self.activityIndicatorView startAnimating];
     button.userInteractionEnabled = NO;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         [self.activityIndicatorView stopAnimating];
         [self shakeButton];
