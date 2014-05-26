@@ -48,7 +48,7 @@
 
 - (void)addCircleLayer
 {
-    CGFloat lineWidth = 10.f;
+    CGFloat lineWidth = 4.f;
     CGFloat radius = CGRectGetWidth(self.bounds)/2 - lineWidth/2;
     self.circleLayer = [CAShapeLayer layer];
     CGRect rect = CGRectMake(lineWidth/2, lineWidth/2, radius * 2, radius * 2);
