@@ -30,7 +30,7 @@
     UIButton *dismissButton = [UIButton buttonWithType:UIButtonTypeSystem];
     dismissButton.translatesAutoresizingMaskIntoConstraints = NO;
     dismissButton.tintColor = [UIColor whiteColor];
-    dismissButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20];
+    dismissButton.titleLabel.font = [UIFont fontWithName:@"Avenir" size:20];
     [dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
     [dismissButton addTarget:self action:@selector(dismiss:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:dismissButton];

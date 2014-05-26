@@ -51,7 +51,7 @@
 - (void)addTitleLabel
 {
     self.titleLabel = [UILabel new];
-    self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.f];
+    self.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:26.f];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.textColor = [UIColor customGrayColor];
     [self setTitleLabel];

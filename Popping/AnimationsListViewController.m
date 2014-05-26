@@ -33,7 +33,7 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Popping";
+    self.title = @"popping";
     [self configureTableView];
     [self configureTitleView];
 }
@@ -85,18 +85,14 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
 - (void)configureTitleView
 {
     UILabel *headlinelabel = [UILabel new];
-    headlinelabel.font = [UIFont fontWithName:@"HelveticaNeue" size:24];
+    headlinelabel.font = [UIFont fontWithName:@"Avenir-Light" size:28];
     headlinelabel.textAlignment = NSTextAlignmentCenter;
-    headlinelabel.textColor = [UIColor customBlueColor];
+    headlinelabel.textColor = [UIColor customGrayColor];
 
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.title];
-    [attributedString addAttribute:NSFontAttributeName
-                             value:[UIFont fontWithName:@"HelveticaNeue-Light" size:24]
-                             range:NSMakeRange(3, 4)];
-
     [attributedString addAttribute:NSForegroundColorAttributeName
-                             value:[UIColor lightGrayColor]
-                             range:NSMakeRange(3, 4)];
+                             value:[UIColor customBlueColor]
+                             range:NSMakeRange(1, 1)];
 
     headlinelabel.attributedText = attributedString;
     [headlinelabel sizeToFit];

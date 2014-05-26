@@ -66,7 +66,7 @@
 - (void)addLabel
 {
     self.errorLabel = [UILabel new];
-    self.errorLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+    self.errorLabel.font = [UIFont fontWithName:@"Avenir-Light" size:18];
     self.errorLabel.textColor = [UIColor customRedColor];
     self.errorLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.errorLabel.text = @"Just a serious login error.";
