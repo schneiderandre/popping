@@ -90,6 +90,7 @@
 
     POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
     scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1, 1)];
+    scaleAnimation.springBounciness = 10.f;
     [view.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
 }
 
@@ -97,6 +98,7 @@
 {
     POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
     scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+     scaleAnimation.springBounciness = 10.f;
     [view.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
 }
 
