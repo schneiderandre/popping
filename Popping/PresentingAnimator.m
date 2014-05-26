@@ -49,7 +49,7 @@
     scaleAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(1.2, 1.4)];
 
     POPBasicAnimation *opacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
-    opacityAnimation.toValue = @(0.1);
+    opacityAnimation.toValue = @(0.2);
 
     [toView.layer pop_addAnimation:positionAnimation forKey:@"positionAnimation"];
     [toView.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
