@@ -32,7 +32,7 @@
 
 + (UIColor *)customBlueColor
 {
-    return [self colorWithRed:41 green:128 blue:185];
+    return [self colorWithRed:52 green:152 blue:219];
 }
 
 #pragma mark - Private class methods
