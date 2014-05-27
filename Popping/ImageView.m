@@ -27,6 +27,8 @@
     return self;
 }
 
+#pragma mark - Property Setters
+
 - (void)setImage:(UIImage *)image
 {
     [self.imageView setImage:image];

@@ -25,6 +25,8 @@
     [self addDismissButton];
 }
 
+#pragma mark - Private Instance methods
+
 - (void)addDismissButton
 {
     UIButton *dismissButton = [UIButton buttonWithType:UIButtonTypeSystem];

@@ -46,7 +46,17 @@
     return self;
 }
 
-#pragma mark - Private instance methods
+#pragma mark - Instance methods
+
+- (void)tintColorDidChange
+{
+    CGColorRef color = [self.tintColor CGColor];
+    self.topLayer.backgroundColor = color;
+    self.middleLayer.backgroundColor = color;
+    self.bottomLayer.backgroundColor = color;
+}
+
+#pragma mark - Private Instance methods
 
 - (void)animateToMenu
 {
@@ -169,14 +179,6 @@
     [self.topLayer pop_removeAllAnimations];
     [self.middleLayer pop_removeAllAnimations];
     [self.bottomLayer pop_removeAllAnimations];
-}
-
-- (void)tintColorDidChange
-{
-    CGColorRef color = [self.tintColor CGColor];
-    self.topLayer.backgroundColor = color;
-    self.middleLayer.backgroundColor = color;
-    self.bottomLayer.backgroundColor = color;
 }
 
 @end

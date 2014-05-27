@@ -13,7 +13,6 @@
 
 @interface PaperButtonViewController()
 @property(nonatomic) UILabel *titleLabel;
-- (void)addControls;
 - (void)addBarButton;
 - (void)addTitleLabel;
 - (void)animateTitleLabel:(id)sender;
@@ -27,16 +26,11 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
 
-    [self addControls];
-}
-
-# pragma mark - Private Instance methods
-
-- (void)addControls
-{
     [self addBarButton];
     [self addTitleLabel];
 }
+
+# pragma mark - Private Instance methods
 
 - (void)addBarButton
 {

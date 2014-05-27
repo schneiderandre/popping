@@ -14,6 +14,7 @@
 - (void)addIndicatorView;
 - (void)animateIndicatorViewToStatus:(PasswordStrengthIndicatorViewStatus)status;
 - (CGFloat)multiplierForStatus:(PasswordStrengthIndicatorViewStatus)status;
+- (UIColor *)colorForStatus:(PasswordStrengthIndicatorViewStatus)status;
 @end
 
 @implementation PasswordStrengthIndicatorView
@@ -30,7 +31,7 @@
     return self;
 }
 
-#pragma mark - Setter
+#pragma mark - Property Setters
 
 - (void)setStatus:(PasswordStrengthIndicatorViewStatus)status
 {

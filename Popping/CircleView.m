@@ -12,6 +12,7 @@
 @interface CircleView()
 @property(nonatomic) CAShapeLayer *circleLayer;
 - (void)addCircleLayer;
+- (void)animateToStrokeEnd:(CGFloat)strokeEnd;
 @end
 
 @implementation CircleView
@@ -26,14 +27,7 @@
     return self;
 }
 
-- (void)animateToStrokeEnd:(CGFloat)strokeEnd
-{
-    POPSpringAnimation *strokeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPShapeLayerStrokeEnd];
-    strokeAnimation.toValue = @(strokeEnd);
-    strokeAnimation.springBounciness = 12.f;
-    strokeAnimation.removedOnCompletion = NO;
-    [self.circleLayer pop_addAnimation:strokeAnimation forKey:@"layerStrokeAnimation"];
-}
+#pragma mark - Instance Methods
 
 - (void)setStrokeEnd:(CGFloat)strokeEnd animated:(BOOL)animated
 {
@@ -42,6 +36,14 @@
         return;
     }
     self.circleLayer.strokeEnd = strokeEnd;
+}
+
+#pragma mark - Property Setters
+
+- (void)setStrokeColor:(UIColor *)strokeColor
+{
+    self.circleLayer.strokeColor = strokeColor.CGColor;
+    _strokeColor = strokeColor;
 }
 
 #pragma mark - Private Instance methods
@@ -64,12 +66,13 @@
     [self.layer addSublayer:self.circleLayer];
 }
 
-#pragma mark - Peroperty Setter
-
-- (void)setStrokeColor:(UIColor *)strokeColor
+- (void)animateToStrokeEnd:(CGFloat)strokeEnd
 {
-    self.circleLayer.strokeColor = strokeColor.CGColor;
-    _strokeColor = strokeColor;
+    POPSpringAnimation *strokeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPShapeLayerStrokeEnd];
+    strokeAnimation.toValue = @(strokeEnd);
+    strokeAnimation.springBounciness = 12.f;
+    strokeAnimation.removedOnCompletion = NO;
+    [self.circleLayer pop_addAnimation:strokeAnimation forKey:@"layerStrokeAnimation"];
 }
 
 @end
