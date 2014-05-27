@@ -8,7 +8,7 @@
 
 #import "AnimationsListViewController.h"
 #import "ButtonViewController.h"
-#import "PanViewController.h"
+#import "ImageViewController.h"
 #import "PaperButtonViewController.h"
 #import "CustomTransitionViewController.h"
 #import "PasswordViewController.h"
@@ -70,7 +70,7 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
     self.items = @[@[@"Button Animation", [ButtonViewController class]],
                    @[@"Decay Animation", [DecayViewController class]],
                    @[@"Circle Animation", [CircleViewController class]],
-                   @[@"Image Animation", [PanViewController class]],
+                   @[@"Image Animation", [ImageViewController class]],
                    @[@"Custom Transition", [CustomTransitionViewController class]],
                    @[@"Paper Button Animation", [PaperButtonViewController class]],
                    @[@"Password Indicator Animation", [PasswordViewController class]],

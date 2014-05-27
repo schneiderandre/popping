@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PanViewController : UIViewController
+@interface ImageViewController : UIViewController
 
 @end

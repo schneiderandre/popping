@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 André Schneider. All rights reserved.
 //
 
-#import "PanViewController.h"
+#import "ImageViewController.h"
 #import <POP/POP.h>
 #import "UIColor+CustomColors.h"
 #import "ImageView.h"
 
-@interface PanViewController()
+@interface ImageViewController()
 - (void)addPanView;
 - (void)touchDown:(UIControl *)sender;
 - (void)touchUpInside:(UIControl *)sender;
@@ -21,7 +21,7 @@
 - (void)scaleUpView:(UIView *)view;
 @end
 
-@implementation PanViewController
+@implementation ImageViewController
 
 - (void)viewDidLoad
 {
