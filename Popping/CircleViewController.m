@@ -27,7 +27,7 @@
     [self addSlider];
 }
 
-#pragma mark - Circle View Controller
+#pragma mark - Private Instance methods
 
 - (void)addCircleView
 {
