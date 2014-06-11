@@ -51,10 +51,21 @@
 }
 
 - (void)touchDown:(UIControl *)sender {
-    [sender.layer pop_removeAllAnimations];
+    for (NSString *key in sender.layer.pop_animationKeys) {
+        POPAnimation *animation = [sender.layer pop_animationForKey:key];
+        [animation setPaused:YES];
+    }
 }
 
 - (void)touchUpInside:(UIControl *)sender {
+    if (sender.layer.pop_animationKeys) {
+        for (NSString *key in sender.layer.pop_animationKeys) {
+            POPAnimation *animation = [sender.layer pop_animationForKey:key];
+            [animation setPaused:NO];
+        }
+        return;
+    }
+
     if (sender.layer.affineTransform.a == 1) {
         [self scaleDownView:sender];
         return;
