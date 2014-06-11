@@ -16,9 +16,9 @@
 - (void)touchDown:(UIControl *)sender;
 - (void)touchUpInside:(UIControl *)sender;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
-
 - (void)scaleDownView:(UIView *)view;
 - (void)scaleUpView:(UIView *)view;
+- (void)pauseAllAnimations:(BOOL)pause forLayer:(CALayer *)layer;
 @end
 
 @implementation ImageViewController
@@ -51,18 +51,12 @@
 }
 
 - (void)touchDown:(UIControl *)sender {
-    for (NSString *key in sender.layer.pop_animationKeys) {
-        POPAnimation *animation = [sender.layer pop_animationForKey:key];
-        [animation setPaused:YES];
-    }
+    [self pauseAllAnimations:YES forLayer:sender.layer];
 }
 
 - (void)touchUpInside:(UIControl *)sender {
     if (sender.layer.pop_animationKeys) {
-        for (NSString *key in sender.layer.pop_animationKeys) {
-            POPAnimation *animation = [sender.layer pop_animationForKey:key];
-            [animation setPaused:NO];
-        }
+        [self pauseAllAnimations:NO forLayer:sender.layer];
         return;
     }
 
@@ -111,6 +105,14 @@
     scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
      scaleAnimation.springBounciness = 10.f;
     [view.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
+}
+
+- (void)pauseAllAnimations:(BOOL)pause forLayer:(CALayer *)layer
+{
+    for (NSString *key in layer.pop_animationKeys) {
+        POPAnimation *animation = [layer pop_animationForKey:key];
+        [animation setPaused:pause];
+    }
 }
 
 @end
