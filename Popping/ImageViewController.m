@@ -1,5 +1,5 @@
 //
-//  PanViewController.m
+//  ImageViewController.m
 //  Popping
 //
 //  Created by André Schneider on 11.05.14.
@@ -12,7 +12,7 @@
 #import "ImageView.h"
 
 @interface ImageViewController()
-- (void)addPanView;
+- (void)addImageView;
 - (void)touchDown:(UIControl *)sender;
 - (void)touchUpInside:(UIControl *)sender;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
@@ -27,12 +27,12 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self addPanView];
+    [self addImageView];
 }
 
 #pragma mark - Private Instance methods
 
-- (void)addPanView
+- (void)addImageView
 {
     UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(handlePan:)];

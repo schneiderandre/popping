@@ -1,5 +1,5 @@
 //
-//  PanViewController.h
+//  ImageViewController.h
 //  Popping
 //
 //  Created by André Schneider on 11.05.14.
