@@ -19,6 +19,7 @@
 - (void)scaleDownView:(UIView *)view;
 - (void)scaleUpView:(UIView *)view;
 - (void)pauseAllAnimations:(BOOL)pause forLayer:(CALayer *)layer;
+- (BOOL)shouldStopScaleAnimationForLayer:(CALayer *)layer;
 @end
 
 @implementation ImageViewController
@@ -55,7 +56,21 @@
 }
 
 - (void)touchUpInside:(UIControl *)sender {
-    if (sender.layer.pop_animationKeys) {
+
+    BOOL stopScale = [self shouldStopScaleAnimationForLayer:sender.layer];
+    if (stopScale) {
+        POPSpringAnimation *animation = [sender.layer pop_animationForKey:@"scaleAnimation"];
+        CGPoint toValue = [animation.toValue CGPointValue];
+        [sender.layer pop_removeAllAnimations];
+        if (toValue.x == 1) {
+            [self scaleDownView:sender];
+        }
+        [self scaleUpView:sender];
+        return;
+    }
+
+    BOOL hasAnimations = sender.layer.pop_animationKeys;
+    if (hasAnimations) {
         [self pauseAllAnimations:NO forLayer:sender.layer];
         return;
     }
@@ -103,7 +118,7 @@
 {
     POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
     scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-     scaleAnimation.springBounciness = 10.f;
+    scaleAnimation.springBounciness = 10.f;
     [view.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
 }
 
@@ -113,6 +128,22 @@
         POPAnimation *animation = [layer pop_animationForKey:key];
         [animation setPaused:pause];
     }
+}
+
+- (BOOL)shouldStopScaleAnimationForLayer:(CALayer *)layer
+{
+    POPSpringAnimation *animation = [layer pop_animationForKey:@"scaleAnimation"];
+    CGPoint toValue = [animation.toValue CGPointValue];
+    CGPoint currentValue = [[animation valueForKey:@"currentValue"] CGPointValue];
+    
+    CGFloat min = MIN(toValue.x, currentValue.x);
+    CGFloat max = MAX(toValue.x, currentValue.x);
+    CGFloat completed = min / max;
+
+    if (completed > 0.98) {
+        return YES;
+    }
+    return NO;
 }
 
 @end
