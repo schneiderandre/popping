@@ -11,6 +11,12 @@
 #import "UIColor+CustomColors.h"
 #import "ImageView.h"
 
+typedef struct {
+    CGFloat progress;
+    CGFloat toValue;
+    CGFloat currentValue;
+} AnimationInfo;
+
 @interface ImageViewController()
 - (void)addImageView;
 - (void)touchDown:(UIControl *)sender;
@@ -19,7 +25,7 @@
 - (void)scaleDownView:(UIView *)view;
 - (void)scaleUpView:(UIView *)view;
 - (void)pauseAllAnimations:(BOOL)pause forLayer:(CALayer *)layer;
-- (BOOL)shouldStopScaleAnimationForLayer:(CALayer *)layer;
+- (AnimationInfo)animationInfoForLayer:(CALayer *)layer;
 @end
 
 @implementation ImageViewController
@@ -56,26 +62,16 @@
 }
 
 - (void)touchUpInside:(UIControl *)sender {
-
-    BOOL stopScale = [self shouldStopScaleAnimationForLayer:sender.layer];
-    if (stopScale) {
-        POPSpringAnimation *animation = [sender.layer pop_animationForKey:@"scaleAnimation"];
-        CGPoint toValue = [animation.toValue CGPointValue];
-        [sender.layer pop_removeAllAnimations];
-        if (toValue.x == 1) {
-            [self scaleDownView:sender];
-        }
-        [self scaleUpView:sender];
-        return;
-    }
-
+    AnimationInfo animationInfo = [self animationInfoForLayer:sender.layer];
     BOOL hasAnimations = sender.layer.pop_animationKeys;
-    if (hasAnimations) {
+
+    if (hasAnimations && animationInfo.progress < 0.98) {
         [self pauseAllAnimations:NO forLayer:sender.layer];
         return;
     }
 
-    if (sender.layer.affineTransform.a == 1) {
+    [sender.layer pop_removeAllAnimations];
+    if (animationInfo.toValue == 1 || sender.layer.affineTransform.a == 1) {
         [self scaleDownView:sender];
         return;
     }
@@ -130,7 +126,7 @@
     }
 }
 
-- (BOOL)shouldStopScaleAnimationForLayer:(CALayer *)layer
+- (AnimationInfo)animationInfoForLayer:(CALayer *)layer
 {
     POPSpringAnimation *animation = [layer pop_animationForKey:@"scaleAnimation"];
     CGPoint toValue = [animation.toValue CGPointValue];
@@ -138,12 +134,12 @@
     
     CGFloat min = MIN(toValue.x, currentValue.x);
     CGFloat max = MAX(toValue.x, currentValue.x);
-    CGFloat completed = min / max;
 
-    if (completed > 0.98) {
-        return YES;
-    }
-    return NO;
+    AnimationInfo info;
+    info.toValue = toValue.x;
+    info.currentValue = currentValue.x;
+    info.progress = min / max;
+    return info;
 }
 
 @end
