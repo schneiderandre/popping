@@ -32,7 +32,7 @@
 {
     BOOL isDragViewOutsideOfSuperView = !CGRectContainsRect(self.view.frame, self.dragView.frame);
     if (isDragViewOutsideOfSuperView) {
-        CGPoint currentVelocity = [[anim valueForKeyPath:@"velocity"] CGPointValue];
+        CGPoint currentVelocity = [anim.velocity CGPointValue];
         CGPoint velocity = CGPointMake(currentVelocity.x, -currentVelocity.y);
         POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
         positionAnimation.velocity = [NSValue valueWithCGPoint:velocity];
