@@ -1,5 +1,5 @@
 //
-//  PanViewController.m
+//  ImageViewController.m
 //  Popping
 //
 //  Created by André Schneider on 11.05.14.
@@ -11,14 +11,21 @@
 #import "UIColor+CustomColors.h"
 #import "ImageView.h"
 
+typedef struct {
+    CGFloat progress;
+    CGFloat toValue;
+    CGFloat currentValue;
+} AnimationInfo;
+
 @interface ImageViewController()
-- (void)addPanView;
+- (void)addImageView;
 - (void)touchDown:(UIControl *)sender;
 - (void)touchUpInside:(UIControl *)sender;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
-
 - (void)scaleDownView:(UIView *)view;
 - (void)scaleUpView:(UIView *)view;
+- (void)pauseAllAnimations:(BOOL)pause forLayer:(CALayer *)layer;
+- (AnimationInfo)animationInfoForLayer:(CALayer *)layer;
 @end
 
 @implementation ImageViewController
@@ -27,12 +34,12 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self addPanView];
+    [self addImageView];
 }
 
 #pragma mark - Private Instance methods
 
-- (void)addPanView
+- (void)addImageView
 {
     UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(handlePan:)];
@@ -51,11 +58,20 @@
 }
 
 - (void)touchDown:(UIControl *)sender {
-    [sender.layer pop_removeAllAnimations];
+    [self pauseAllAnimations:YES forLayer:sender.layer];
 }
 
 - (void)touchUpInside:(UIControl *)sender {
-    if (sender.layer.affineTransform.a == 1) {
+    AnimationInfo animationInfo = [self animationInfoForLayer:sender.layer];
+    BOOL hasAnimations = sender.layer.pop_animationKeys;
+
+    if (hasAnimations && animationInfo.progress < 0.98) {
+        [self pauseAllAnimations:NO forLayer:sender.layer];
+        return;
+    }
+
+    [sender.layer pop_removeAllAnimations];
+    if (animationInfo.toValue == 1 || sender.layer.affineTransform.a == 1) {
         [self scaleDownView:sender];
         return;
     }
@@ -98,8 +114,32 @@
 {
     POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
     scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-     scaleAnimation.springBounciness = 10.f;
+    scaleAnimation.springBounciness = 10.f;
     [view.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
+}
+
+- (void)pauseAllAnimations:(BOOL)pause forLayer:(CALayer *)layer
+{
+    for (NSString *key in layer.pop_animationKeys) {
+        POPAnimation *animation = [layer pop_animationForKey:key];
+        [animation setPaused:pause];
+    }
+}
+
+- (AnimationInfo)animationInfoForLayer:(CALayer *)layer
+{
+    POPSpringAnimation *animation = [layer pop_animationForKey:@"scaleAnimation"];
+    CGPoint toValue = [animation.toValue CGPointValue];
+    CGPoint currentValue = [[animation valueForKey:@"currentValue"] CGPointValue];
+    
+    CGFloat min = MIN(toValue.x, currentValue.x);
+    CGFloat max = MAX(toValue.x, currentValue.x);
+
+    AnimationInfo info;
+    info.toValue = toValue.x;
+    info.currentValue = currentValue.x;
+    info.progress = min / max;
+    return info;
 }
 
 @end
