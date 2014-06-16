@@ -63,7 +63,7 @@ typedef struct {
 
 - (void)touchUpInside:(UIControl *)sender {
     AnimationInfo animationInfo = [self animationInfoForLayer:sender.layer];
-    BOOL hasAnimations = sender.layer.pop_animationKeys;
+    BOOL hasAnimations = sender.layer.pop_animationKeys.count;
 
     if (hasAnimations && animationInfo.progress < 0.98) {
         [self pauseAllAnimations:NO forLayer:sender.layer];
