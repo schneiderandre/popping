@@ -15,6 +15,7 @@
 #import "ConstraintsViewController.h"
 #import "CircleViewController.h"
 #import "DecayViewController.h"
+#import "FoldViewController.h"
 #import "MenuTableViewCell.h"
 #import "UIColor+CustomColors.m"
 
@@ -73,6 +74,7 @@ static NSString * const kCellIdentifier = @"cellIdentifier";
                    @[@"Image Animation", [ImageViewController class]],
                    @[@"Custom Transition", [CustomTransitionViewController class]],
                    @[@"Paper Button Animation", [PaperButtonViewController class]],
+                   @[@"Fold Animation", [FoldViewController class]],
                    @[@"Password Indicator Animation", [PasswordViewController class]],
                    @[@"Constraints Animation", [ConstraintsViewController class]]
                    ];
