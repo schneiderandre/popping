@@ -7,6 +7,7 @@
 //
 
 #import "FoldViewController.h"
+#import "FoldView.h"
 
 @interface FoldViewController()
 - (void)addFoldView;
@@ -30,8 +31,7 @@
     CGFloat width = CGRectGetWidth(self.view.bounds) - padding * 2;
     CGRect frame = CGRectMake(0, 0, width, width);
 
-    UIView *foldView = [[UIView alloc] initWithFrame:frame];
-    foldView.backgroundColor = [UIColor redColor];
+    FoldView *foldView = [[FoldView alloc] initWithFrame:frame];
     foldView.center = self.view.center;
     [self.view addSubview:foldView];
 }

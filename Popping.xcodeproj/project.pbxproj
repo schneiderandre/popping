@@ -10,6 +10,7 @@
 		74CC34E42E0A4A91BF6C604C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D41116F6FC8F4542BD5F61B1 /* libPods.a */; };
 		B70458341923DB2100CF6961 /* CustomTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458331923DB2100CF6961 /* CustomTransitionViewController.m */; };
 		B70458381923DE2500CF6961 /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B70458371923DE2500CF6961 /* PresentingAnimator.m */; };
+		B735E318195728B300837F60 /* FoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = B735E317195728B300837F60 /* FoldView.m */; };
 		B7388F0C192E9F13000E6941 /* DecayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7388F0B192E9F13000E6941 /* DecayViewController.m */; };
 		B7711667192AA5870078DFD7 /* ConstraintsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7711666192AA5870078DFD7 /* ConstraintsViewController.m */; };
 		B775FA781954A9FD0033EB42 /* FoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B775FA771954A9FD0033EB42 /* FoldViewController.m */; };
@@ -58,6 +59,8 @@
 		B70458331923DB2100CF6961 /* CustomTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTransitionViewController.m; sourceTree = "<group>"; };
 		B70458361923DE2500CF6961 /* PresentingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentingAnimator.h; sourceTree = "<group>"; };
 		B70458371923DE2500CF6961 /* PresentingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentingAnimator.m; sourceTree = "<group>"; };
+		B735E316195728B300837F60 /* FoldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoldView.h; sourceTree = "<group>"; };
+		B735E317195728B300837F60 /* FoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoldView.m; sourceTree = "<group>"; };
 		B7388F0A192E9F13000E6941 /* DecayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecayViewController.h; sourceTree = "<group>"; };
 		B7388F0B192E9F13000E6941 /* DecayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DecayViewController.m; sourceTree = "<group>"; };
 		B7711665192AA5870078DFD7 /* ConstraintsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintsViewController.h; sourceTree = "<group>"; };
@@ -156,6 +159,15 @@
 				B78E3DEC1926A5120020B9D4 /* PresentingAnimator */,
 			);
 			name = Animator;
+			sourceTree = "<group>";
+		};
+		B735E315195728A500837F60 /* FoldView */ = {
+			isa = PBXGroup;
+			children = (
+				B735E316195728B300837F60 /* FoldView.h */,
+				B735E317195728B300837F60 /* FoldView.m */,
+			);
+			name = FoldView;
 			sourceTree = "<group>";
 		};
 		B7388F09192E9ED4000E6941 /* DecayViewController */ = {
@@ -336,6 +348,7 @@
 		B7ECD74B192115D8007F9116 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				B735E315195728A500837F60 /* FoldView */,
 				B7F8B063193272490036193C /* ImageView */,
 				B79B5C20192D361600A82EEB /* CircleView */,
 				B7805EE2192913E300CF997E /* PasswordStrengthIndicatorView */,
@@ -602,6 +615,7 @@
 				B785AD2119196A2D00621820 /* main.m in Sources */,
 				B7805EE1192902A900CF997E /* PasswordViewController.m in Sources */,
 				B78E3DF01926A57D0020B9D4 /* DismissingAnimator.m in Sources */,
+				B735E318195728B300837F60 /* FoldView.m in Sources */,
 				B7F8B062193270980036193C /* ImageView.m in Sources */,
 				B7ECD74A19211489007F9116 /* PaperButtonViewController.m in Sources */,
 				B7FF9668191EBADD00087016 /* AnimationsListViewController.m in Sources */,
