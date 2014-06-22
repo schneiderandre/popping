@@ -8,12 +8,32 @@
 
 #import "FoldViewController.h"
 
+@interface FoldViewController()
+- (void)addFoldView;
+@end
+
 @implementation FoldViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+
+    [self addFoldView];
+}
+
+#pragma mark - Private instance methods
+
+- (void)addFoldView
+{
+    CGFloat padding = 30.f;
+    CGFloat width = CGRectGetWidth(self.view.bounds) - padding * 2;
+    CGRect frame = CGRectMake(0, 0, width, width);
+
+    UIView *foldView = [[UIView alloc] initWithFrame:frame];
+    foldView.backgroundColor = [UIColor redColor];
+    foldView.center = self.view.center;
+    [self.view addSubview:foldView];
 }
 
 @end
