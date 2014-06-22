@@ -16,6 +16,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor customBlueColor];
+        self.layer.cornerRadius = 5.f;
     }
     return self;
 }
