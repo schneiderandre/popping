@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FoldView : UIView
+@interface FoldView : UIImageView
+
+- (id)initWithFrame:(CGRect)frame image:(UIImage *)image;
 
 @end

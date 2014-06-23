@@ -11,12 +11,13 @@
 
 @implementation FoldView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame image:(UIImage *)image
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor customBlueColor];
-        self.layer.cornerRadius = 5.f;
+        self.image = image;
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = 5;
     }
     return self;
 }

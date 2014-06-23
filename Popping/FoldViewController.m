@@ -31,7 +31,8 @@
     CGFloat width = CGRectGetWidth(self.view.bounds) - padding * 2;
     CGRect frame = CGRectMake(0, 0, width, width);
 
-    FoldView *foldView = [[FoldView alloc] initWithFrame:frame];
+    FoldView *foldView = [[FoldView alloc] initWithFrame:frame
+                                                   image:[UIImage imageNamed:@"boat.jpg"]];
     foldView.center = self.view.center;
     [self.view addSubview:foldView];
 }
