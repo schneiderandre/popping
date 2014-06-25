@@ -17,9 +17,12 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 @interface FoldView()
 - (void)addTopView;
 - (void)addBottomView;
+- (void)addGestureRecognizer;
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer;
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image;
 
 @property(nonatomic) UIImage *image;
+@property(nonatomic) UIImageView *topView;
 @end
 
 @implementation FoldView
@@ -34,6 +37,8 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 
         [self addTopView];
         [self addBottomView];
+
+        [self addGestureRecognizer];
     }
     return self;
 }
@@ -44,13 +49,14 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 {
     UIImage *image = [self imageForSection:LayerSectionTop withImage:self.image];
 
-    UIImageView *topView = [[UIImageView alloc] initWithFrame:CGRectMake(0.f,
-                                                                         0.f,
-                                                                         CGRectGetWidth(self.bounds),
-                                                                         CGRectGetMidY(self.bounds))];
-    topView.image = image;
-    topView.contentMode = UIViewContentModeScaleAspectFill;
-    [self addSubview:topView];
+    self.topView = [[UIImageView alloc] initWithFrame:CGRectMake(0.f,
+                                                                 0.f,
+                                                                 CGRectGetWidth(self.bounds),
+                                                                 CGRectGetMidY(self.bounds))];
+    self.topView.image = image;
+    self.topView.userInteractionEnabled = YES;
+    self.topView.contentMode = UIViewContentModeScaleAspectFill;
+    [self addSubview:self.topView];
 }
 
 - (void)addBottomView
@@ -64,6 +70,16 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     bottomView.image = image;
     bottomView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:bottomView];
+}
+
+- (void)addGestureRecognizer
+{
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(handlePan:)];
+    [self.topView addGestureRecognizer:panGestureRecognizer];
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
 }
 
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image
