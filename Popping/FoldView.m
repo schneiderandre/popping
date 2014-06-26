@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 - (void)addGestureRecognizer;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image;
+- (void)rotateToOrigin;
 
 @property(nonatomic) UIImage *image;
 @property(nonatomic) UIImageView *topView;
@@ -82,7 +83,8 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     [self.topView addGestureRecognizer:panGestureRecognizer];
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer
+{
     CGPoint location = [recognizer locationInView:self];
 
     if ((location.x > 0 && location.x < CGRectGetWidth(self.bounds)) &&
@@ -97,6 +99,22 @@ typedef NS_ENUM(NSInteger, LayerSection) {
         recognizer.enabled = NO;
         recognizer.enabled = YES;
     }
+
+    if (recognizer.state == UIGestureRecognizerStateEnded ||
+        recognizer.state == UIGestureRecognizerStateCancelled) {
+        [self rotateToOrigin];
+    }
+}
+
+- (void)rotateToOrigin
+{
+    POPSpringAnimation *rotationAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationX];
+    rotationAnimation.springBounciness = 18.0f;
+    rotationAnimation.dynamicsMass = 2.0f;
+    rotationAnimation.dynamicsTension = 200;
+    rotationAnimation.toValue = @(0);
+    rotationAnimation.delegate = self;
+    [self.topView.layer pop_addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image
