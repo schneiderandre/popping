@@ -8,6 +8,7 @@
 
 #import "FoldView.h"
 #import "UIColor+CustomColors.h"
+#import <POP/POP.h>
 
 typedef NS_ENUM(NSInteger, LayerSection) {
     LayerSectionTop,
@@ -35,8 +36,8 @@ typedef NS_ENUM(NSInteger, LayerSection) {
         self.layer.masksToBounds = YES;
         self.layer.cornerRadius = 5;
 
-        [self addTopView];
         [self addBottomView];
+        [self addTopView];
 
         [self addGestureRecognizer];
     }
@@ -54,6 +55,8 @@ typedef NS_ENUM(NSInteger, LayerSection) {
                                                                  CGRectGetWidth(self.bounds),
                                                                  CGRectGetMidY(self.bounds))];
     self.topView.image = image;
+    self.topView.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    self.topView.layer.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     self.topView.userInteractionEnabled = YES;
     self.topView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:self.topView];
@@ -80,6 +83,20 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    CGPoint location = [recognizer locationInView:self];
+
+    if ((location.x > 0 && location.x < CGRectGetWidth(self.bounds)) &&
+        (location.y > 0 && location.y < CGRectGetHeight(self.bounds))) {
+        CGFloat conversionFactor = -M_PI / CGRectGetHeight(self.bounds);
+        POPBasicAnimation *rotationAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerRotationX];
+
+        rotationAnimation.duration = 0.01;
+        rotationAnimation.toValue = @(location.y*conversionFactor);
+        [self.topView.layer pop_addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    } else {
+        recognizer.enabled = NO;
+        recognizer.enabled = YES;
+    }
 }
 
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image
