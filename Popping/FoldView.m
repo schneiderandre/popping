@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 - (void)addTopView;
 - (void)addBottomView;
 - (void)addGestureRecognizer;
+- (CATransform3D)transform3D;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image;
 - (void)rotateToOrigin;
@@ -58,6 +59,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     self.topView.image = image;
     self.topView.layer.anchorPoint = CGPointMake(0.5, 1.0);
     self.topView.layer.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    self.topView.layer.transform = [self transform3D];
     self.topView.userInteractionEnabled = YES;
     self.topView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:self.topView];
@@ -115,6 +117,13 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     rotationAnimation.toValue = @(0);
     rotationAnimation.delegate = self;
     [self.topView.layer pop_addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+}
+
+- (CATransform3D)transform3D
+{
+    CATransform3D transform = CATransform3DIdentity;
+    transform.m34 = 2.0 / -2000;
+    return transform;
 }
 
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image
