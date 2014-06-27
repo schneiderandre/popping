@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 - (CATransform3D)transform3D
 {
     CATransform3D transform = CATransform3DIdentity;
-    transform.m34 = 2.0 / -2000;
+    transform.m34 = 2.5 / -2000;
     return transform;
 }
 
