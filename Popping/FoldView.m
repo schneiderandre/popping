@@ -19,10 +19,11 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 - (void)addTopView;
 - (void)addBottomView;
 - (void)addGestureRecognizer;
-- (CATransform3D)transform3D;
-- (void)handlePan:(UIPanGestureRecognizer *)recognizer;
-- (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image;
 - (void)rotateToOrigin;
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer;
+- (CATransform3D)transform3D;
+- (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image;
+- (CAShapeLayer *)maskForSection:(LayerSection)section withRect:(CGRect)rect;
 
 @property(nonatomic) UIImage *image;
 @property(nonatomic) UIImageView *topView;
@@ -35,8 +36,6 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     self = [super initWithFrame:frame];
     if (self) {
         _image = image;
-        self.layer.masksToBounds = YES;
-        self.layer.cornerRadius = 5;
 
         [self addBottomView];
         [self addTopView];
@@ -60,6 +59,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     self.topView.layer.anchorPoint = CGPointMake(0.5, 1.0);
     self.topView.layer.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     self.topView.layer.transform = [self transform3D];
+    self.topView.layer.mask = [self maskForSection:LayerSectionTop withRect:self.topView.bounds];
     self.topView.userInteractionEnabled = YES;
     self.topView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:self.topView];
@@ -75,6 +75,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
                                                                             CGRectGetMidY(self.bounds))];
     bottomView.image = image;
     bottomView.contentMode = UIViewContentModeScaleAspectFill;
+    bottomView.layer.mask = [self maskForSection:LayerSectionBottom withRect:bottomView.bounds];
     [self addSubview:bottomView];
 }
 
@@ -138,6 +139,17 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     CGImageRelease(imgRef);
 
     return imagePart;
+}
+
+- (CAShapeLayer *)maskForSection:(LayerSection)section withRect:(CGRect)rect
+{
+    CAShapeLayer *layerMask = [CAShapeLayer layer];
+    UIRectCorner corners = (section == LayerSectionTop) ? 3 : 12;
+
+    layerMask.path = [UIBezierPath bezierPathWithRoundedRect:rect
+                                           byRoundingCorners:corners
+                                                 cornerRadii:CGSizeMake(5, 5)].CGPath;
+    return layerMask;
 }
 
 @end
