@@ -18,8 +18,9 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 @interface FoldView()
 - (void)addTopView;
 - (void)addBottomView;
-- (void)addGestureRecognizer;
+- (void)addGestureRecognizers;
 - (void)rotateToOrigin;
+- (void)poke;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
 - (CATransform3D)transform3D;
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image;
@@ -40,7 +41,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
         [self addBottomView];
         [self addTopView];
 
-        [self addGestureRecognizer];
+        [self addGestureRecognizers];
     }
     return self;
 }
@@ -79,11 +80,20 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     [self addSubview:bottomView];
 }
 
-- (void)addGestureRecognizer
+- (void)addGestureRecognizers
 {
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(handlePan:)];
+
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(poke)];
+
     [self.topView addGestureRecognizer:panGestureRecognizer];
+    [self.topView addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void)poke {
+    NSLog(@"Poke!");
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
