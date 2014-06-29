@@ -93,7 +93,13 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 }
 
 - (void)poke {
-    NSLog(@"Poke!");
+    POPSpringAnimation *rotationAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationX];
+    rotationAnimation.velocity = @(5);
+    rotationAnimation.springBounciness = 18.0f;
+    rotationAnimation.dynamicsMass = 4.0f;
+    rotationAnimation.dynamicsTension = 200;
+    rotationAnimation.toValue = @(0);
+    [self.topView.layer pop_addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
