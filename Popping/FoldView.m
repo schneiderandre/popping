@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 - (void)addTopView;
 - (void)addBottomView;
 - (void)addGestureRecognizers;
-- (void)rotateToOrigin;
+- (void)rotateToOriginWithVelocity:(CGFloat)velocity;
 - (void)poke;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
 - (CATransform3D)transform3D;
@@ -93,13 +93,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 }
 
 - (void)poke {
-    POPSpringAnimation *rotationAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationX];
-    rotationAnimation.velocity = @(5);
-    rotationAnimation.springBounciness = 18.0f;
-    rotationAnimation.dynamicsMass = 4.0f;
-    rotationAnimation.dynamicsTension = 200;
-    rotationAnimation.toValue = @(0);
-    [self.topView.layer pop_addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    [self rotateToOriginWithVelocity:5];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
@@ -121,13 +115,16 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 
     if (recognizer.state == UIGestureRecognizerStateEnded ||
         recognizer.state == UIGestureRecognizerStateCancelled) {
-        [self rotateToOrigin];
+        [self rotateToOriginWithVelocity:0];
     }
 }
 
-- (void)rotateToOrigin
+- (void)rotateToOriginWithVelocity:(CGFloat)velocity
 {
     POPSpringAnimation *rotationAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotationX];
+    if (velocity > 0) {
+        rotationAnimation.velocity = @(velocity);
+    }
     rotationAnimation.springBounciness = 18.0f;
     rotationAnimation.dynamicsMass = 2.0f;
     rotationAnimation.dynamicsTension = 200;
