@@ -11,6 +11,7 @@
 
 @interface FoldViewController()
 - (void)addFoldView;
+@property(nonatomic) FoldView *foldView;
 @end
 
 @implementation FoldViewController
@@ -23,6 +24,11 @@
     [self addFoldView];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.foldView poke];
+}
+
 #pragma mark - Private instance methods
 
 - (void)addFoldView
@@ -31,10 +37,10 @@
     CGFloat width = CGRectGetWidth(self.view.bounds) - padding * 2;
     CGRect frame = CGRectMake(0, 0, width, width);
 
-    FoldView *foldView = [[FoldView alloc] initWithFrame:frame
+    self.foldView = [[FoldView alloc] initWithFrame:frame
                                                    image:[UIImage imageNamed:@"boat.jpg"]];
-    foldView.center = self.view.center;
-    [self.view addSubview:foldView];
+    self.foldView.center = self.view.center;
+    [self.view addSubview:self.foldView];
 }
 
 @end

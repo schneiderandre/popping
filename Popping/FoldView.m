@@ -20,7 +20,6 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 - (void)addBottomView;
 - (void)addGestureRecognizers;
 - (void)rotateToOriginWithVelocity:(CGFloat)velocity;
-- (void)poke;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
 - (CATransform3D)transform3D;
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image;

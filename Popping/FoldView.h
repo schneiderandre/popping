@@ -11,5 +11,6 @@
 @interface FoldView : UIView
 
 - (id)initWithFrame:(CGRect)frame image:(UIImage *)image;
+- (void)poke;
 
 @end
