@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 
 @property(nonatomic) UIImage *image;
 @property(nonatomic) UIImageView *topView;
+@property(nonatomic) UIView *backView;
 @end
 
 @implementation FoldView
@@ -64,10 +65,11 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     self.topView.contentMode = UIViewContentModeScaleAspectFill;
 
 
-    UIView *backView = [[UIView alloc] initWithFrame:self.topView.bounds];
-    backView.backgroundColor = [UIColor redColor];
+    self.backView = [[UIView alloc] initWithFrame:self.topView.bounds];
+    self.backView.backgroundColor = [UIColor redColor];
+    self.backView.alpha = 0.0;
 
-    [self.topView addSubview:backView];
+    [self.topView addSubview:self.backView];
     [self addSubview:self.topView];
 }
 
@@ -104,6 +106,12 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
 {
     CGPoint location = [recognizer locationInView:self];
+
+    if ([[self.topView.layer valueForKeyPath:@"transform.rotation.x"] floatValue] < -M_PI_2) {
+        self.backView.alpha = 1.0;
+    } else {
+        self.backView.alpha = 0.0;
+    }
 
     if ((location.x > 0 && location.x < CGRectGetWidth(self.bounds)) &&
         (location.y > 0 && location.y < CGRectGetHeight(self.bounds))) {
