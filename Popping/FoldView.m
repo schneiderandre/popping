@@ -62,6 +62,12 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     self.topView.layer.mask = [self maskForSection:LayerSectionTop withRect:self.topView.bounds];
     self.topView.userInteractionEnabled = YES;
     self.topView.contentMode = UIViewContentModeScaleAspectFill;
+
+
+    UIView *backView = [[UIView alloc] initWithFrame:self.topView.bounds];
+    backView.backgroundColor = [UIColor redColor];
+
+    [self.topView addSubview:backView];
     [self addSubview:self.topView];
 }
 
