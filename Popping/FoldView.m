@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     LayerSectionBottom
 };
 
-@interface FoldView()
+@interface FoldView() <POPAnimationDelegate>
 - (void)addTopView;
 - (void)addBottomView;
 - (void)addGestureRecognizers;
@@ -176,6 +176,16 @@ typedef NS_ENUM(NSInteger, LayerSection) {
                                            byRoundingCorners:corners
                                                  cornerRadii:CGSizeMake(5, 5)].CGPath;
     return layerMask;
+}
+
+#pragma mark - POPAnimationDelegate
+
+- (void)pop_animationDidApply:(POPAnimation *)anim
+{
+    CGFloat currentValue = [[anim valueForKey:@"currentValue"] floatValue];
+    if (currentValue > -M_PI_2) {
+        self.backView.alpha = 0.f;
+    }
 }
 
 @end
