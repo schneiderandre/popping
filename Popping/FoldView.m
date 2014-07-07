@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 - (CATransform3D)transform3D;
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image;
 - (CAShapeLayer *)maskForSection:(LayerSection)section withRect:(CGRect)rect;
+- (BOOL)isLocation:(CGPoint)location inView:(UIView *)view;
 
 @property(nonatomic) UIImage *image;
 @property(nonatomic) UIImageView *topView;
@@ -113,8 +114,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
         self.backView.alpha = 0.0;
     }
 
-    if ((location.x > 0 && location.x < CGRectGetWidth(self.bounds)) &&
-        (location.y > 0 && location.y < CGRectGetHeight(self.bounds))) {
+    if ([self isLocation:location inView:self]) {
         CGFloat conversionFactor = -M_PI / CGRectGetHeight(self.bounds);
         POPBasicAnimation *rotationAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerRotationX];
 
@@ -151,6 +151,14 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     CATransform3D transform = CATransform3DIdentity;
     transform.m34 = 2.5 / -2000;
     return transform;
+}
+
+- (BOOL)isLocation:(CGPoint)location inView:(UIView *)view {
+    if ((location.x > 0 && location.x < CGRectGetWidth(self.bounds)) &&
+        (location.y > 0 && location.y < CGRectGetHeight(self.bounds))) {
+        return YES;
+    }
+    return NO;
 }
 
 - (UIImage *)imageForSection:(LayerSection)section withImage:(UIImage *)image
