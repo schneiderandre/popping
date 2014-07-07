@@ -100,7 +100,8 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     [self.topView addGestureRecognizer:tapGestureRecognizer];
 }
 
-- (void)poke {
+- (void)poke
+{
     [self rotateToOriginWithVelocity:5];
 }
 
@@ -153,7 +154,8 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     return transform;
 }
 
-- (BOOL)isLocation:(CGPoint)location inView:(UIView *)view {
+- (BOOL)isLocation:(CGPoint)location inView:(UIView *)view
+{
     if ((location.x > 0 && location.x < CGRectGetWidth(self.bounds)) &&
         (location.y > 0 && location.y < CGRectGetHeight(self.bounds))) {
         return YES;
