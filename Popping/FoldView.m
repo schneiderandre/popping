@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 
 @property(nonatomic) UIImage *image;
 @property(nonatomic) UIImageView *topView;
-@property(nonatomic) UIView *backView;
+@property(nonatomic) UIImageView *backView;
 @end
 
 @implementation FoldView
@@ -65,9 +65,8 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     self.topView.userInteractionEnabled = YES;
     self.topView.contentMode = UIViewContentModeScaleAspectFill;
 
-
-    self.backView = [[UIView alloc] initWithFrame:self.topView.bounds];
-    self.backView.backgroundColor = [UIColor redColor];
+    self.backView = [[UIImageView alloc] initWithFrame:self.topView.bounds];
+    self.backView.image = image;
     self.backView.alpha = 0.0;
 
     [self.topView addSubview:self.backView];
