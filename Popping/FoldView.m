@@ -8,6 +8,7 @@
 
 #import "FoldView.h"
 #import "UIColor+CustomColors.h"
+#import "UIImage+Blur.h"
 #import <POP/POP.h>
 
 typedef NS_ENUM(NSInteger, LayerSection) {
@@ -66,7 +67,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     self.topView.contentMode = UIViewContentModeScaleAspectFill;
 
     self.backView = [[UIImageView alloc] initWithFrame:self.topView.bounds];
-    self.backView.image = image;
+    self.backView.image = [image blurredImage];;
     self.backView.alpha = 0.0;
 
     [self.topView addSubview:self.backView];
