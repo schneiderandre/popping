@@ -99,7 +99,6 @@
 {
     self.indicatorView = [UIView new];
     self.indicatorView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.indicatorView.backgroundColor = [UIColor redColor];
     self.indicatorView.layer.cornerRadius = self.layer.cornerRadius;
     [self addSubview:self.indicatorView];
 
