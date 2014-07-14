@@ -7,7 +7,6 @@
 //
 
 #import "FoldView.h"
-#import "UIColor+CustomColors.h"
 #import "UIImage+Blur.h"
 #import <POP/POP.h>
 
