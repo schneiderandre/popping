@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 @property(nonatomic) UIImage *image;
 @property(nonatomic) UIImageView *topView;
 @property(nonatomic) UIImageView *backView;
+@property(nonatomic) CAGradientLayer *bottomShadowLayer;
+@property(nonatomic) CAGradientLayer *topShadowLayer;
 @end
 
 @implementation FoldView
@@ -69,7 +71,12 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     self.backView.image = [image blurredImage];;
     self.backView.alpha = 0.0;
 
+    self.topShadowLayer = [CAGradientLayer layer];
+    self.topShadowLayer.frame = self.topView.bounds;
+    self.topShadowLayer.colors = @[(id)[UIColor clearColor].CGColor, (id)[UIColor blackColor].CGColor];
+
     [self.topView addSubview:self.backView];
+    [self.topView.layer addSublayer:self.topShadowLayer];
     [self addSubview:self.topView];
 }
 
@@ -84,6 +91,12 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     bottomView.image = image;
     bottomView.contentMode = UIViewContentModeScaleAspectFill;
     bottomView.layer.mask = [self maskForSection:LayerSectionBottom withRect:bottomView.bounds];
+
+    self.bottomShadowLayer = [CAGradientLayer layer];
+    self.bottomShadowLayer.frame = bottomView.bounds;
+    self.bottomShadowLayer.colors = @[(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor];
+
+    [bottomView.layer addSublayer:self.bottomShadowLayer];
     [self addSubview:bottomView];
 }
 
