@@ -74,6 +74,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     self.topShadowLayer = [CAGradientLayer layer];
     self.topShadowLayer.frame = self.topView.bounds;
     self.topShadowLayer.colors = @[(id)[UIColor clearColor].CGColor, (id)[UIColor blackColor].CGColor];
+    self.topShadowLayer.opacity = 0;
 
     [self.topView addSubview:self.backView];
     [self.topView.layer addSublayer:self.topShadowLayer];
@@ -95,6 +96,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     self.bottomShadowLayer = [CAGradientLayer layer];
     self.bottomShadowLayer.frame = bottomView.bounds;
     self.bottomShadowLayer.colors = @[(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor];
+    self.bottomShadowLayer.opacity = 0;
 
     [bottomView.layer addSublayer:self.bottomShadowLayer];
     [self addSubview:bottomView];
@@ -123,8 +125,20 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 
     if ([[self.topView.layer valueForKeyPath:@"transform.rotation.x"] floatValue] < -M_PI_2) {
         self.backView.alpha = 1.0;
+        [CATransaction begin];
+        [CATransaction setValue:(id)kCFBooleanTrue
+                         forKey:kCATransactionDisableActions];
+        self.topShadowLayer.opacity = 0.0;
+        self.bottomShadowLayer.opacity = location.y/CGRectGetHeight(self.bounds);
+        [CATransaction commit];
     } else {
         self.backView.alpha = 0.0;
+        [CATransaction begin];
+        [CATransaction setValue:(id)kCFBooleanTrue
+                         forKey:kCATransactionDisableActions];
+        self.bottomShadowLayer.opacity = location.y/CGRectGetHeight(self.bounds);
+        self.topShadowLayer.opacity = location.y/CGRectGetHeight(self.bounds);
+        [CATransaction commit];
     }
 
     if ([self isLocation:location inView:self]) {
@@ -207,6 +221,12 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     CGFloat currentValue = [[anim valueForKey:@"currentValue"] floatValue];
     if (currentValue > -M_PI_2) {
         self.backView.alpha = 0.f;
+        [CATransaction begin];
+        [CATransaction setValue:(id)kCFBooleanTrue
+                         forKey:kCATransactionDisableActions];
+        self.bottomShadowLayer.opacity = -currentValue/M_PI;
+        self.topShadowLayer.opacity = -currentValue/M_PI;
+        [CATransaction commit];
     }
 }
 
