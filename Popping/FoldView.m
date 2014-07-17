@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 @property(nonatomic) UIImageView *backView;
 @property(nonatomic) CAGradientLayer *bottomShadowLayer;
 @property(nonatomic) CAGradientLayer *topShadowLayer;
+@property(nonatomic) NSUInteger initialLocation;
 @end
 
 @implementation FoldView
@@ -123,6 +124,10 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 {
     CGPoint location = [recognizer locationInView:self];
 
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        self.initialLocation = location.y;
+    }
+
     if ([[self.topView.layer valueForKeyPath:@"transform.rotation.x"] floatValue] < -M_PI_2) {
         self.backView.alpha = 1.0;
         [CATransaction begin];
@@ -136,17 +141,18 @@ typedef NS_ENUM(NSInteger, LayerSection) {
         [CATransaction begin];
         [CATransaction setValue:(id)kCFBooleanTrue
                          forKey:kCATransactionDisableActions];
-        self.bottomShadowLayer.opacity = location.y/CGRectGetHeight(self.bounds);
-        self.topShadowLayer.opacity = location.y/CGRectGetHeight(self.bounds);
+        CGFloat opacity = (location.y-self.initialLocation)/(CGRectGetHeight(self.bounds)-self.initialLocation);
+        self.bottomShadowLayer.opacity = opacity;
+        self.topShadowLayer.opacity = opacity;
         [CATransaction commit];
     }
 
     if ([self isLocation:location inView:self]) {
-        CGFloat conversionFactor = -M_PI / CGRectGetHeight(self.bounds);
+        CGFloat conversionFactor = -M_PI / (CGRectGetHeight(self.bounds) - self.initialLocation);
         POPBasicAnimation *rotationAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerRotationX];
 
         rotationAnimation.duration = 0.01;
-        rotationAnimation.toValue = @(location.y*conversionFactor);
+        rotationAnimation.toValue = @((location.y-self.initialLocation)*conversionFactor);
         [self.topView.layer pop_addAnimation:rotationAnimation forKey:@"rotationAnimation"];
     } else {
         recognizer.enabled = NO;
