@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
         [CATransaction setValue:(id)kCFBooleanTrue
                          forKey:kCATransactionDisableActions];
         self.topShadowLayer.opacity = 0.0;
-        self.bottomShadowLayer.opacity = location.y/CGRectGetHeight(self.bounds);
+        self.bottomShadowLayer.opacity = (location.y-self.initialLocation)/(CGRectGetHeight(self.bounds)-self.initialLocation);
         [CATransaction commit];
     } else {
         self.backView.alpha = 0.0;
