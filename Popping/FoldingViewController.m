@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 André Schneider. All rights reserved.
 //
 
-#import "FoldViewController.h"
-#import "FoldView.h"
+#import "FoldingViewController.h"
+#import "FoldingView.h"
 
-@interface FoldViewController()
+@interface FoldingViewController()
 - (void)addFoldView;
-@property(nonatomic) FoldView *foldView;
+@property(nonatomic) FoldingView *foldView;
 @end
 
-@implementation FoldViewController
+@implementation FoldingViewController
 
 - (void)viewDidLoad
 {
@@ -37,7 +37,7 @@
     CGFloat width = CGRectGetWidth(self.view.bounds) - padding * 2;
     CGRect frame = CGRectMake(0, 0, width, width);
 
-    self.foldView = [[FoldView alloc] initWithFrame:frame
+    self.foldView = [[FoldingView alloc] initWithFrame:frame
                                                    image:[UIImage imageNamed:@"boat.jpg"]];
     self.foldView.center = self.view.center;
     [self.view addSubview:self.foldView];

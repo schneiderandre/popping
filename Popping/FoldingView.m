@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 André Schneider. All rights reserved.
 //
 
-#import "FoldView.h"
+#import "FoldingView.h"
 #import "UIImage+Blur.h"
 #import <POP/POP.h>
 
@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
     LayerSectionBottom
 };
 
-@interface FoldView() <POPAnimationDelegate>
+@interface FoldingView() <POPAnimationDelegate>
 - (void)addTopView;
 - (void)addBottomView;
 - (void)addGestureRecognizers;
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, LayerSection) {
 @property(nonatomic) NSUInteger initialLocation;
 @end
 
-@implementation FoldView
+@implementation FoldingView
 
 - (id)initWithFrame:(CGRect)frame image:(UIImage *)image
 {

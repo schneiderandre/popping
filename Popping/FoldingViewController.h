@@ -1,5 +1,5 @@
 //
-//  FoldViewController.h
+//  FoldingViewController.h
 //  Popping
 //
 //  Created by André Schneider on 20.06.14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FoldViewController : UIViewController
+@interface FoldingViewController : UIViewController
 
 @end
