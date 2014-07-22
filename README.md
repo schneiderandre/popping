@@ -4,7 +4,7 @@ Popping is a collection of animation examples for iOS apps. Almost all of them w
 
 ![popping](https://dl.dropboxusercontent.com/u/19150300/Github/Popping/popping.gif)
 
-Watch [this video](https://dl.dropboxusercontent.com/u/19150300/Github/Popping/popping.mp4) to see all animations in action.
+Watch [this video](https://dl.dropboxusercontent.com/u/19150300/Github/Popping/popping.mp4) to see all animations in action. In addition, [here](http://cl.ly/WffM/popping-folding-animation.mp4) is the video of the folding animation that was added later.
 
 ## Get your hands dirty
 
