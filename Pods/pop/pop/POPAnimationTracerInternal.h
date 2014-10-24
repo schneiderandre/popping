@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <POP/POPAnimationTracer.h>
+#import <pop/POPAnimationTracer.h>
 
 @interface POPAnimationTracer (Internal)
 
@@ -87,5 +87,10 @@
  @abstract Records did reach to value.
  */
 - (void)didReachToValue:(id)aValue;
+
+/**
+ @abstract Records when an autoreverse animation takes place.
+ */
+- (void)autoreversed;
 
 @end

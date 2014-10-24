@@ -18,7 +18,7 @@ Alternatively, you can add the project to your workspace and adopt the provided 
 Pop adopts the Core Animation explicit animation programming model. Use by including the following import:
 
 ```objective-c
-#import <POP/POP.h>
+#import <pop/POP.h>
 ```
 
 ### Start, Stop & Update
@@ -147,18 +147,20 @@ Assuming CocoaPods is installed, this will include the necessary OCMock dependen
 
 A collection of links to external resources that may prove valuable:
 
+* [AGGeometryKit+POP - Animating Quadrilaterals with Pop](https://github.com/hfossli/aggeometrykit-pop)
 * [Apple – Core Animation Programming Guide](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html)
-* [Tapity Tutorial – Getting Started with Pop](http://tapity.com/tutorial-getting-started-with-pop/)
 * [Codeplease – Bridging the gesture to animation gap](http://codeplease.io/playing-with-pop-ii/)
 * [Codeplease – Playing with Pop (iii)](http://codeplease.io/playing-with-pop-iii/)
 * [Codeplease – Adding a custom animatable property](http://codeplease.io/playing-with-pop-v/)
-* [iOS Devevelopment Tips – UIScrollView-like deceleration with Pop](http://iosdevtips.co/post/84571595353/replicating-uiscrollviews-deceleration-with-facebook)
+* [iOS Development Tips – UIScrollView-like deceleration with Pop](http://iosdevtips.co/post/84571595353/replicating-uiscrollviews-deceleration-with-facebook)
 * [Pop Playground – Repository of Pop animation examples](https://github.com/callmeed/pop-playground)
 * [Pop Playground 2 – Playing with Facebook's framework](http://victorbaro.com/2014/05/pop-playground-playing-with-facebooks-framework/)
 * [POP-MCAnimate – Concise syntax for the Pop animation framework](https://github.com/matthewcheok/POP-MCAnimate)
-* [Tweaks – Easily adjust parameters for iOS apps in development](https://github.com/facebook/tweaks)
+* [Popping - Great examples in one project](https://github.com/schneiderandre/popping)
 * [Rebound – Spring Animations for Android](http://facebook.github.io/rebound/)
-
+* [Tapity Tutorial – Getting Started with Pop](http://tapity.com/tutorial-getting-started-with-pop/)
+* [Tweaks – Easily adjust parameters for iOS apps in development](https://github.com/facebook/tweaks)
+* [POP Tutorial in 5 steps](https://github.com/maxmyers/FacebookPop)
 
 ## Contributing
 See the CONTRIBUTING file for how to help out.

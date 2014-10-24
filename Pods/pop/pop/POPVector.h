@@ -15,6 +15,9 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 #import <objc/NSObjCRuntime.h>
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#endif
 #import "POPMath.h"
 
 namespace POP {
@@ -226,7 +229,7 @@ namespace POP {
 
     // Equality
     bool operator== (T v) const { return (x == v && y == v && z = v, w = v); }
-    bool operator== (const Vector4 &v) const { return (x == v.x && y == v.y && z == v.z && w = v.w); }
+    bool operator== (const Vector4 &v) const { return (x == v.x && y == v.y && z == v.z && w == v.w); }
 
     // Inequality
     bool operator!= (T v) const {return (x != v || y != v || z != v || w != v); }
@@ -320,6 +323,12 @@ namespace POP {
     CGRect cg_rect() const;
     static Vector *new_cg_rect(const CGRect &r);
 
+#if TARGET_OS_IPHONE
+    // UIEdgeInsets support
+    UIEdgeInsets ui_edge_insets() const;
+    static Vector *new_ui_edge_insets(const UIEdgeInsets &i);
+#endif
+
     // CGAffineTransform support
     CGAffineTransform cg_affine_transform() const;
     static Vector *new_cg_affine_transform(const CGAffineTransform &t);
@@ -342,7 +351,7 @@ namespace POP {
     void subRound(CGFloat sub);
 
     // Returns string description
-    NSString * const toString() const;
+    NSString * toString() const;
 
     // Operator overloads
     template<typename U> Vector& operator= (const Vector4<U>& other) {

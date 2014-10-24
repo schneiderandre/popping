@@ -1,10 +1,10 @@
 PODS:
-  - pop (1.0.5)
+  - pop (1.0.7)
 
 DEPENDENCIES:
   - pop
 
 SPEC CHECKSUMS:
-  pop: b4720ddec3fb20abeb378c3feaadd18b27988bc1
+  pop: 2f14a1ea61339767af9e66741b418c831b3844df
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.34.4

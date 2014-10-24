@@ -11,7 +11,6 @@
 #import "POPAnimationTracerInternal.h"
 
 #import <objc/runtime.h>
-#include <unordered_map>
 
 #import "POPAnimationExtras.h"
 #import "POPAnimationRuntime.h"
@@ -23,6 +22,9 @@ using namespace POP;
 #pragma mark - POPAnimation
 
 @implementation POPAnimation
+@synthesize solver = _solver;
+@synthesize currentValue = _currentValue;
+@synthesize progressMarkers = _progressMarkers;
 
 #pragma mark - Lifecycle
 
@@ -76,11 +78,51 @@ using namespace POP;
   _state->setPaused(paused ? true : false);
 }
 
+- (NSInteger)repeatCount
+{
+  if (_state->autoreverses) {
+    return _state->repeatCount / 2;
+  } else {
+    return _state->repeatCount;
+  }
+}
+
+- (void)setRepeatCount:(NSInteger)repeatCount
+{
+  if (repeatCount > 0) {
+    if (repeatCount > NSIntegerMax / 2) {
+      repeatCount = NSIntegerMax / 2;
+    }
+
+    if (_state->autoreverses) {
+      _state->repeatCount = (repeatCount * 2);
+    } else {
+      _state->repeatCount = repeatCount;
+    }
+  }
+}
+
+- (BOOL)autoreverses
+{
+  return _state->autoreverses;
+}
+
+- (void)setAutoreverses:(BOOL)autoreverses
+{
+  _state->autoreverses = autoreverses;
+  if (autoreverses) {
+    if (_state->repeatCount == 0) {
+      [self setRepeatCount:1];
+    }
+  }
+}
+
 FB_PROPERTY_GET(POPAnimationState, type, POPAnimationType);
 DEFINE_RW_PROPERTY_OBJ_COPY(POPAnimationState, completionBlock, setCompletionBlock:, POPAnimationCompletionBlock);
 DEFINE_RW_PROPERTY_OBJ_COPY(POPAnimationState, name, setName:, NSString*);
 DEFINE_RW_PROPERTY(POPAnimationState, beginTime, setBeginTime:, CFTimeInterval);
 DEFINE_RW_FLAG(POPAnimationState, removedOnCompletion, removedOnCompletion, setRemovedOnCompletion:);
+DEFINE_RW_FLAG(POPAnimationState, repeatForever, repeatForever, setRepeatForever:);
 
 - (id)valueForUndefinedKey:(NSString *)key
 {

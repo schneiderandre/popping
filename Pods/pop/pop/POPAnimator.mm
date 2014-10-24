@@ -19,6 +19,7 @@
 #import "POPAnimation.h"
 #import "POPAnimationExtras.h"
 #import "POPBasicAnimationInternal.h"
+#import "POPDecayAnimation.h"
 
 using namespace std;
 using namespace POP;
@@ -97,6 +98,9 @@ static BOOL _disableBackgroundThread = YES;
 @end
 
 @implementation POPAnimator
+@synthesize delegate = _delegate;
+@synthesize disableDisplayLink = _disableDisplayLink;
+@synthesize beginTime = _beginTime;
 
 #if !TARGET_OS_IPHONE
 static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *now, const CVTimeStamp *outputTime, CVOptionFlags flagsIn, CVOptionFlags *flagsOut, void *context)
@@ -134,7 +138,7 @@ static void updateDisplayLink(POPAnimator *self)
 #endif
 }
 
-static void updateAnimatable(id obj, POPPropertyAnimationState *anim)
+static void updateAnimatable(id obj, POPPropertyAnimationState *anim, bool shouldAvoidExtraneousWrite = false)
 {
   // handle user-initiated stop or pause; hault animation
   if (!anim->active || anim->paused)
@@ -144,11 +148,26 @@ static void updateAnimatable(id obj, POPPropertyAnimationState *anim)
     pop_animatable_write_block write = anim->property.writeBlock;
     if (NULL == write)
       return;
-    
-    if (!anim->additive) {
-      
-      VectorRef currentVec = anim->currentValue();
 
+    // current animation value
+    VectorRef currentVec = anim->currentValue();
+
+    if (!anim->additive) {
+
+      // if avoiding extraneous writes and we have a read block defined
+      if (shouldAvoidExtraneousWrite) {
+
+        pop_animatable_read_block read = anim->property.readBlock;
+        if (read) {
+          // compare current animation value with object value
+          Vector4r currentValue = currentVec->vector4r();
+          Vector4r objectValue = read_values(read, obj, anim->valueCount);
+          if (objectValue == currentValue) {
+            return;
+          }
+        }
+      }
+      
       // update previous values; support animation convergence
       anim->previous2Vec = anim->previousVec;
       anim->previousVec = currentVec;
@@ -160,22 +179,28 @@ static void updateAnimatable(id obj, POPPropertyAnimationState *anim)
       }
     } else {
       pop_animatable_read_block read = anim->property.readBlock;
-      if (NULL == read)
+      NSCAssert(read, @"additive requires an animatable property readBlock");
+      if (NULL == read) {
         return;
-      
+      }
+
       // object value
       Vector4r objectValue = read_values(read, obj, anim->valueCount);
 
-      // current animation value
-      VectorRef currentVec = anim->currentValue();
+      // current value
       Vector4r currentValue = currentVec->vector4r();
-
+      
       // determine animation change
       if (anim->previousVec) {
         Vector4r previousValue = anim->previousVec->vector4r();
         currentValue -= previousValue;
       }
 
+      // avoid writing no change
+      if (shouldAvoidExtraneousWrite && currentValue == Vector4r::Zero()) {
+        return;
+      }
+      
       // add to object value
       currentValue += objectValue;
       
@@ -206,15 +231,17 @@ static void applyAnimationTime(id obj, POPAnimationState *state, CFTimeInterval 
   state->delegateApply();
 }
 
-static void applyAnimationProgress(id obj, POPAnimationState *state, CGFloat progress)
+static void applyAnimationToValue(id obj, POPAnimationState *state)
 {
   POPPropertyAnimationState *ps = dynamic_cast<POPPropertyAnimationState*>(state);
-  if (ps && !ps->advanceProgress(progress)) {
-    return;
-  }
 
   if (NULL != ps) {
-    updateAnimatable(obj, ps);
+    
+    // finalize progress
+    ps->finalizeProgress();
+    
+    // write to value, updating only if needed
+    updateAnimatable(obj, ps, true);
   }
   
   state->delegateApply();
@@ -263,7 +290,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     // lock
     OSSpinLockLock(&self->_lock);
 
-    // find item im list
+    // find item in list
     // may have already been removed on animationDidStop:
     POPAnimatorItemListIterator find_iter = find(self->_list.begin(), self->_list.end(), item);
     BOOL found = find_iter != self->_list.end();
@@ -309,8 +336,8 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   _displayLink.paused = YES;
   [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 #else
-  CVReturn ret = CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
-  ret = CVDisplayLinkSetOutputCallback(_displayLink, displayLinkCallback, (__bridge void *)self);
+  CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
+  CVDisplayLinkSetOutputCallback(_displayLink, displayLinkCallback, (__bridge void *)self);
 #endif
 
   _dict = POPDictionaryCreateMutableWeakPointerToStrongObject(5);
@@ -335,7 +362,8 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 - (void)_processPendingList
 {
   // rendering pending animations
-  [self _renderTime:(0 != _beginTime) ? _beginTime : CACurrentMediaTime() items:_pendingList];
+  CFTimeInterval time = [self _currentRenderTime];
+  [self _renderTime:(0 != _beginTime) ? _beginTime : time items:_pendingList];
 
   // lock
   OSSpinLockLock(&_lock);
@@ -389,7 +417,8 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   [CATransaction setDisableActions:YES];
 
   // notify delegate
-  [_delegate animatorWillAnimate:self];
+  __strong __typeof__(_delegate) delegate = _delegate;
+  [delegate animatorWillAnimate:self];
 
   // lock
   OSSpinLockLock(&_lock);
@@ -426,7 +455,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   OSSpinLockUnlock(&_lock);
 
   // notify delegate and commit
-  [_delegate animatorDidAnimate:self];
+  [delegate animatorDidAnimate:self];
   [CATransaction commit];
 }
 
@@ -451,13 +480,46 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
       applyAnimationTime(obj, state, time);
 
       FBLogAnimDebug(@"time:%f running:%@", time, item->animation);
-
       if (state->isDone()) {
         // set end value
-        applyAnimationProgress(obj, state, 1.0);
+        applyAnimationToValue(obj, state);
 
-        // finished succesfully, cleanup
-        stopAndCleanup(self, item, state->removedOnCompletion, YES);
+        state->repeatCount--;
+        if (state->repeatForever || state->repeatCount > 0) {
+          if ([anim isKindOfClass:[POPPropertyAnimation class]]) {
+            POPPropertyAnimation *propAnim = (POPPropertyAnimation *)anim;
+            id oldFromValue = propAnim.fromValue;
+            propAnim.fromValue = propAnim.toValue;
+
+            if (state->autoreverses) {
+              if (state->tracing) {
+                [state->tracer autoreversed];
+              }
+
+              if (state->type == kPOPAnimationDecay) {
+                POPDecayAnimation *decayAnimation = (POPDecayAnimation *)propAnim;
+                decayAnimation.velocity = [decayAnimation reversedVelocity];
+              } else {
+                propAnim.toValue = oldFromValue;
+              }
+            } else {
+              if (state->type == kPOPAnimationDecay) {
+                POPDecayAnimation *decayAnimation = (POPDecayAnimation *)propAnim;
+                id originalVelocity = decayAnimation.originalVelocity;
+                decayAnimation.velocity = originalVelocity;
+              } else {
+                propAnim.fromValue = oldFromValue;
+              }
+            }
+          }
+
+          state->stop(NO, NO);
+          state->reset(true);
+
+          state->startIfNeeded(obj, time, _slowMotionAccumulator);
+        } else {
+          stopAndCleanup(self, item, state->removedOnCompletion, YES);
+        }
       }
     }
   }
@@ -505,10 +567,14 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     if (existingAnim) {
       // unlock
       OSSpinLockUnlock(&_lock);
+
       if (existingAnim == anim) {
         return;
       }
       [self removeAnimationForObject:obj key:key cleanupDict:NO];
+        
+      // lock
+      OSSpinLockLock(&_lock);
     }
   }
   keyAnimationDict[key] = anim;
@@ -648,7 +714,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   return animation;
 }
 
-- (void)render
+- (CFTimeInterval)_currentRenderTime
 {
   CFTimeInterval time = CACurrentMediaTime();
 
@@ -672,6 +738,12 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 #endif
 
+  return time;
+}
+
+- (void)render
+{
+  CFTimeInterval time = [self _currentRenderTime];
   [self renderTime:time];
 }
 

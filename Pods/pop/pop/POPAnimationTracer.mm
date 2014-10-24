@@ -22,6 +22,7 @@
   NSMutableArray *_events;
   BOOL _animationHasVelocity;
 }
+@synthesize shouldLogAndResetOnCompletion = _shouldLogAndResetOnCompletion;
 
 static POPAnimationEvent *create_event(POPAnimationTracer *self, POPAnimationEventType type, id value = nil, bool recordAnimation = false)
 {
@@ -140,6 +141,12 @@ static POPAnimationEvent *create_event(POPAnimationTracer *self, POPAnimationEve
 - (void)didReachToValue:(id)aValue
 {
   POPAnimationEvent *event = create_event(self, kPOPAnimationEventDidReachToValue, aValue);
+  [_events addObject:event];
+}
+
+- (void)autoreversed
+{
+  POPAnimationEvent *event = create_event(self, kPOPAnimationEventAutoreversed);
   [_events addObject:event];
 }
 

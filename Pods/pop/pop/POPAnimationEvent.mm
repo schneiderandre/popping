@@ -39,12 +39,17 @@ static NSString *stringFromType(POPAnimationEventType aType)
       return @"didStop";
     case kPOPAnimationEventDidReachToValue:
       return @"didReachToValue";
+    case kPOPAnimationEventAutoreversed:
+      return @"autoreversed";
     default:
       return nil;
   }
 }
 
 @implementation POPAnimationEvent
+@synthesize type = _type;
+@synthesize time = _time;
+@synthesize animationDescription = _animationDescription;
 
 - (instancetype)initWithType:(POPAnimationEventType)aType time:(CFTimeInterval)aTime
 {
@@ -75,6 +80,8 @@ static NSString *stringFromType(POPAnimationEventType aType)
 @end
 
 @implementation POPAnimationValueEvent
+@synthesize value = _value;
+@synthesize velocity = _velocity;
 
 - (instancetype)initWithType:(POPAnimationEventType)aType time:(CFTimeInterval)aTime value:(id)aValue
 {
