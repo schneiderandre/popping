@@ -13,6 +13,7 @@
 @property(nonatomic) UIView *redView;
 @property(nonatomic) UIView *greenView;
 @property(nonatomic) UIView *blueView;
+@property(nonatomic) UIView *contentView;
 - (void)addBarButton;
 - (void)addViews;
 - (void)updateConstraints:(id)sender;
@@ -43,6 +44,22 @@
 
 - (void)addViews
 {
+    self.contentView = [UIView new];
+    self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.contentView.backgroundColor = self.view.backgroundColor;
+    [self.view addSubview:self.contentView];
+
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"H:|[_contentView]|"
+                               options:NSLayoutFormatDirectionLeadingToTrailing
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(_contentView)]];
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:|[_contentView]|"
+                               options:NSLayoutFormatDirectionLeadingToTrailing
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(_contentView)]];
+
     self.redView = [UIView new];
     self.redView.backgroundColor = [UIColor customBlueColor];
     self.redView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -56,15 +73,16 @@
     self.blueView.translatesAutoresizingMaskIntoConstraints = NO;
     self.blueView.layer.cornerRadius = 4.f;
 
-    [self.view addSubview:self.redView];
-    [self.view addSubview:self.greenView];
-    [self.view addSubview:self.blueView];
+    [self.contentView addSubview:self.redView];
+    [self.contentView addSubview:self.greenView];
+    [self.contentView addSubview:self.blueView];
 }
 
 - (void)updateConstraints:(id)sender
 {
-    [self.view layoutIfNeeded];
-    [self.view removeConstraints:self.view.constraints];
+
+    [self.contentView layoutIfNeeded];
+    [self.contentView removeConstraints:self.contentView.constraints];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_redView, _greenView, _blueView);
     NSArray *viewNames = [self shuffledArrayFromArray:views.allKeys];
@@ -73,30 +91,30 @@
     NSString *secondViewKey = viewNames[1];
     NSString *thirdViewKey = viewNames[2];
 
-    NSString *horizontalFormat = [NSString stringWithFormat:@"H:|-[%@]-|", firstViewKey];
-    NSString *additionalHorizontalFormat = [NSString stringWithFormat:@"H:|-[%1$@]-[%2$@(==%1$@)]-|", secondViewKey, thirdViewKey];
-    NSString *verticalFormat = [NSString stringWithFormat:@"V:|-(88)-[%1$@]-[%2$@(==%1$@)]-|", firstViewKey, secondViewKey];
-    NSString *additionalVerticalFormat = [NSString stringWithFormat:@"V:|-(88)-[%1$@]-[%2$@(==%1$@)]-|", firstViewKey, thirdViewKey];
+    NSString *horizontalFormat = [NSString stringWithFormat:@"H:|-(20)-[%@]-(20)-|", firstViewKey];
+    NSString *additionalHorizontalFormat = [NSString stringWithFormat:@"H:|-(20)-[%1$@]-(20)-[%2$@(==%1$@)]-(20)-|", secondViewKey, thirdViewKey];
+    NSString *verticalFormat = [NSString stringWithFormat:@"V:|-(88)-[%1$@]-(20)-[%2$@(==%1$@)]-(20)-|", firstViewKey, secondViewKey];
+    NSString *additionalVerticalFormat = [NSString stringWithFormat:@"V:|-(88)-[%1$@]-(20)-[%2$@(==%1$@)]-(20)-|", firstViewKey, thirdViewKey];
 
-    [self.view addConstraints:[NSLayoutConstraint
+    [self.contentView addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:horizontalFormat
                                options:0
                                metrics:nil
                                views:views]];
 
-    [self.view addConstraints:[NSLayoutConstraint
+    [self.contentView addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:additionalHorizontalFormat
                                options:NSLayoutFormatAlignAllTop
                                metrics:nil
                                views:views]];
 
-    [self.view addConstraints:[NSLayoutConstraint
+    [self.contentView addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:verticalFormat
                                options:0
                                metrics:nil
                                views:views]];
 
-    [self.view addConstraints:[NSLayoutConstraint
+    [self.contentView addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:additionalVerticalFormat
                                options:0
                                metrics:nil
@@ -108,7 +126,7 @@
           initialSpringVelocity:0.7
                         options:0
                      animations:^{
-        [self.view layoutIfNeeded];
+        [self.contentView layoutIfNeeded];
     } completion:NULL];
 }
 
