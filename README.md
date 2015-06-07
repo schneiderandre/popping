@@ -18,8 +18,8 @@ Great! Just let me know what classes you'd like to use and I will create a libra
 
 I would love to get some feedback, ideas for improvements or new animations that should be included in this project.
 
-I would also greatly appreciate if you follow me on [twitter](http://twitter.com/aschndr).
+I would also greatly appreciate if you follow me on [twitter](http://twitter.com/_schneiderandre).
 
 ## Author
 
-André Schneider, [@aschndr](http://twitter.com/aschndr)
+André Schneider, [@_schneiderandre](http://twitter.com/_schneiderandre)
