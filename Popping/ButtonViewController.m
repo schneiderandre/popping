@@ -88,9 +88,9 @@
                               relatedBy:NSLayoutRelationEqual toItem:self.button
                               attribute:NSLayoutAttributeCenterY
                               multiplier:1
-                              constant:0]];
+                              constant:self.button.intrinsicContentSize.height]];
 
-    self.errorLabel.layer.transform = CATransform3DMakeScale(0.5f, 0.5f, 1.f);
+    self.errorLabel.layer.opacity = 0.0;
 }
 
 - (void)addActivityIndicatorView
